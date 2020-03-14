@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>history timeline</title>
+  <style>
+    body {
+      background: #000;
+    }
+    .timeline {
+      display: flex;
+      margin-top: 50vh;
+      /* background: #fff; */
+      /* height: 1px; */
+    }
+    .dynasty {
+      position: relative;
+      display: grid;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      border-top: 1px solid;
+      flex-shrink: 0;
+      padding-top: 10px;
+    }
+    .start,.end {
+      position: relative;
+    }
+    .dynasty:not(:first-child)::before {
+      position: absolute;
+      content: '';
+      top: -5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+    }
+    /* .end::after {
+      position: absolute;
+      content: '';
+      top: -5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #fff;
+    } */
+  </style>
+</head>
+<body >
+  <div class="timeline">
+    <div class="dynasty" style="width: 100px;">
+      远古
+      <!-- <div class="start">部落联卖</div> -->
+    </div>
+    <div class="dynasty" style="width: 470px;">
+      夏朝（470年）
+      <div class="start">前2070年 - 前1600年</div>
+    </div>
+    <div class="dynasty" style="width: 554px;">
+      商朝（554年）
+      <div class="start">前1600年 - 前1046年</div>
+    </div>
+    <div class="dynasty" style="width: 275px;">
+      西周（275年）
+      <div class="start">前1046年 - 前771年</div>
+    </div>
+    <div class="dynasty" style="width: 295px;">
+      东周（春秋295年）
+      <div class="start">前770年 - 前476年</div>
+    </div>
+    <div class="dynasty" style="width: 254px;">
+      东周（战国294年）
+      <div class="start">前475年 - 前221年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      秦朝（15年）
+      <div>前221年 - 前207年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      西楚（5年）
+      <div>前206年-前202年</div>
+    </div>
+    <div class="dynasty" style="width: 210px;">
+      西汉（210年）
+      <div>前202—公元8年11月</div>
+    </div>
+    <div class="dynasty" style="width: 200px;">
+      新朝（16年）
+      <div>公元8年12月-23年10月</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      玄汉（2年）
+      <div>23年10月-25年</div>
+    </div>
+    <div class="dynasty" style="width: 195px;">
+      东汉（195年）
+      <div>25年-220年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      三国（60年）
+      <div>220年－280年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      西晋（51年）
+      <div>265年－316年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      东晋（103年）
+      <div>五胡十六国</div>
+      <div>317年－420年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      南朝·宋（59年）
+      <div>北魏</div>
+      <div>420年-479年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      南朝·齐（23年）
+      <div>东魏西魏</div>
+      <div>479年-502年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      南朝·梁（55年）
+      <div>北齐北周</div>
+      <div>502年-557年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      南朝·陈（32年）
+      <div>557年-589年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      隋朝（38年）
+      <div>581年-619年</div>
+    </div>
+    <div class="dynasty" style="width: 289px;">
+      唐朝（289年）
+      <div>五代十国</div>
+      <div>618年-907年</div>
+    </div>
+    <div class="dynasty" style="width: 167px;">
+      北宋（167年）
+      <div>西辽</div>
+      <div>960年-1127年</div>
+    </div>
+    <div class="dynasty" style="width: 152px;">
+      南宋（152年）
+      <div>西夏金</div>
+      <div>1127年-1279年</div>
+    </div>
+    <div class="dynasty" style="width: 199px;">
+      元（199年）
+      <div>1206年-1402年</div>
+    </div>
+    <div class="dynasty" style="width: 296px;">
+      明（296年）
+      <div>1368年-1662年</div>
+    </div>
+    <div class="dynasty" style="width: 296px;">
+      清（296年）
+      <div>1616年-1912年</div>
+    </div>
+    <div class="dynasty" style="width: 150px;">
+      中华民国（38年）
+      <div>1912年-1949年</div>
+    </div>
+    <div class="dynasty" style="width: 400px;">
+      新中国
+      <div>1949年~</div>
+    </div>
+  </div>
+</body>
+</html>
