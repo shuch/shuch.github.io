@@ -4,7 +4,8 @@
     <style>
       body {
         background-size: 100%;
-        background-image: url('https://raw.githubusercontent.com/yuzhi/yuzhi.github.io/master/images/desert.jpg');
+        background-position: center;
+        /* background-image: url('./images/desert.jpg'); */
       }
 
       /*.fadeIn {
@@ -21,10 +22,12 @@
   <body>
     <p id="quote"></p>
     <script>
+      const randomNum = Math.ceil(Math.random() * 5);
+      document.body.style.backgroundImage = `url(./images/${randomNum}.jpg)`;
+
       const quoteNode = document.getElementById('quote');
 
       const quotes = [
-        '人生应该如蜡烛一样，从顶燃到底，一直都是光明的。 —— 萧楚女',
         '人生的价值，即以其人对于当代所做的工作为尺度。 —— 徐玮',
         '路是脚踏出来的，历史是人写出来的。人的每一步行动都在书写自己的历史。 —— 吉鸿昌',
         '春蚕到死丝方尽，人至期颐亦不休。一息尚存须努力，留作青年好范畴。 —— 吴玉章',
@@ -55,7 +58,6 @@
         '自私自利之心，是立人达人之障。 —— 吕坤',
         '如烟往事俱忘却，心底无私天地宽。 —— 陶铸',
         '常求有利别人，不求有利自己。 —— 谢觉哉',
-        '一切利己的生活，都是非理性的，动物的生活。 —— 列夫·托尔斯泰',
         '人的理性粉碎了迷信，而人的感情也将摧毁利己主义。 —— 海涅',
         '无私是稀有的道德，因为从它身上是无利可图的。 —— 布莱希特',
         '君子喻于义，小人喻于利。 —— 孔丘',
