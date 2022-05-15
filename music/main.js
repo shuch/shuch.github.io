@@ -10,11 +10,12 @@ var favList = [
   { id: 7, path: 'lib/8.m4a', name: '出现又离开', singer: '梁博', avatar: "lib/avatar/liangbo.jpg" },
   { id: 8, path: 'lib/9.mp3', name: '心随你去', singer: '李阳 / 路默依', avatar: "lib/avatar/liyang.jpg" },
   { id: 9, path: 'lib/10.m4a', name: '白狐', singer: '陈瑞', avatar: "lib/avatar/chenrui.jpg" },
+  { id: 10, path: 'lib/11.mp3', name: '飞鸟和蝉', singer: '任然', avatar: "lib/avatar/renran.jpeg" },
 ]
 
 function init() {
   let favNodeList = document.getElementById('favList')
-  for (let i = 0; i < favList.length; i++) {
+  for (let i = favList.length - 1; i >= 0; i--) {
     let fav = favList[i]
     let li = document.createElement('li')
     let avatar = document.createElement('img')
@@ -56,9 +57,9 @@ function init() {
 
 function initEvent() {
   let favNodeList = document.getElementById('favList')
-  favNodeList.addEventListener('click', (e) => {
-    // console.log('e.target22', e.path);
-    let target = e.path.find(item => item.localName === 'li' && item.className === 'favItem')
+  favNodeList.addEventListener('click', (event) => {
+    let path = event.path || (event.composedPath && event.composedPath()) || '';
+    let target = path.find(item => item.localName === 'li' && item.className === 'favItem')
     // console.log('target22', target);
     if (!target) {
       return
