@@ -11,6 +11,9 @@ var favList = [
   { id: 8, path: 'lib/9.mp3', name: '心随你去', singer: '李阳 / 路默依', avatar: "lib/avatar/liyang.jpg" },
   { id: 9, path: 'lib/10.m4a', name: '白狐', singer: '陈瑞', avatar: "lib/avatar/chenrui.jpg" },
   { id: 10, path: 'lib/11.mp3', name: '飞鸟和蝉', singer: '任然', avatar: "lib/avatar/renran.jpeg" },
+  { id: 11, path: 'lib/12.m4a', name: '阿刁', singer: '张韶涵', avatar: "lib/avatar/adiao.png" },
+  { id: 12, path: 'lib/13.m4a', name: '南山南', singer: '马頔', avatar: "lib/avatar/nanshannan.jpeg" },
+  { id: 13, path: 'lib/14.m4a', name: '爱人错过', singer: '告五人', avatar: "lib/avatar/gaowuren.jpeg" },
 ]
 
 function init() {
@@ -82,10 +85,10 @@ function getCurrentFavSong() {
 function getNextFavSong(path) {
   let curIndex = favList.findIndex(item => item.path === path)
   if (curIndex !== -1) {
-    if (curIndex + 1 >= favList.length) {
-      return favList[0]
+    if (curIndex - 1 < 0) {
+      return favList[favList.length-1]
     }
-    return favList[curIndex+1]
+    return favList[curIndex-1]
   }
-  return favList[0]
+  return favList[favList.length-1]
 }
