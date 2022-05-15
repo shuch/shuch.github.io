@@ -7,7 +7,7 @@ var favList = [
   { id: 4, path: 'lib/5.m4a', name: '骄傲的少年', singer: '南征北战NZBZ', avatar: "lib/avatar/nzbz.jpg" },
   { id: 5, path: 'lib/6.m4a', name: 'The Champion', singer: 'Carrie Underwood / Ludacris', avatar: "lib/avatar/carrie.jpg" },
   { id: 6, path: 'lib/7.m4a', name: 'Easy On Me', singer: 'Adele', avatar: "lib/avatar/adele.jpg" },
-  { id: 7, path: 'lib/8.m4a', name: '出现又离开', singer: '梁博', avatar: "lib/avatar/liangbo.jpg" },
+  { id: 7, path: 'lib/8.mp3', name: '出现又离开', singer: '梁博', avatar: "lib/avatar/liangbo.jpg" },
   { id: 8, path: 'lib/9.mp3', name: '心随你去', singer: '李阳 / 路默依', avatar: "lib/avatar/liyang.jpg" },
   { id: 9, path: 'lib/10.m4a', name: '白狐', singer: '陈瑞', avatar: "lib/avatar/chenrui.jpg" },
   { id: 10, path: 'lib/11.mp3', name: '飞鸟和蝉', singer: '任然', avatar: "lib/avatar/renran.jpeg" },
