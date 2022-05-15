@@ -14,6 +14,7 @@ var favList = [
   { id: 11, path: 'lib/12.m4a', name: '阿刁', singer: '张韶涵', avatar: "lib/avatar/adiao.png" },
   { id: 12, path: 'lib/13.m4a', name: '南山南', singer: '马頔', avatar: "lib/avatar/nanshannan.jpeg" },
   { id: 13, path: 'lib/14.m4a', name: '爱人错过', singer: '告五人', avatar: "lib/avatar/gaowuren.jpeg" },
+  { id: 14, path: 'lib/15.m4a', name: 'Beautiful In White', singer: 'Westlife', avatar: "lib/avatar/westlife.jpeg" },
 ]
 
 function init() {
