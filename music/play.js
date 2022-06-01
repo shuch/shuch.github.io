@@ -1,4 +1,5 @@
 var myAudio = document.createElement('audio');
+var singleLoop = false
 
 // if (myAudio.canPlayType('audio/mpeg')) {
 //   myAudio.setAttribute('src','audiofile.mp3');
@@ -68,7 +69,7 @@ function playAction(e) {
   updateFooter()
 }
 
-function forwardAction(e) {
+function forwardAction() {
   let curAttr = myAudio.getAttribute('src')
   if (curAttr) {
     let currentFavSong = getNextFavSong(curAttr)

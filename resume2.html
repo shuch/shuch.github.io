@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>舒晨的软件工程师简历</title>
+    <style>
+      body {
+        width: 800px;
+        margin: 0 auto;
+      }
+      header {
+        color:white;
+        padding: 0 20px;
+        background-color: rgb(0,74,154);
+      }
+      main {
+        padding: 0 20px
+      }
+      .row {
+        display: flex;
+      }
+      .company {
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .time {
+        float:right;
+        color: #bbb;
+      }
+      .mt20 {
+        margin-top: 20px;
+      }
+      .pd40 {
+        padding-left: 24px;
+      }
+      .border {
+        border-bottom: 1px solid #eee;
+      }
+      .cert {
+        margin-right: 10px;
+      }
+      h2 {
+        color: #32aa44;
+      }
+      li + li {
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  
+  <body id="pdf">
+    <!-- <header class="header row">
+      <div>
+        <h1>舒晨</h1>
+        <p>17602151165 | 2272728859@qq.com | 男 | 1992/06</p>
+        <p>上海 | 在职-考虑机会 | 6年⼯作经验 | 求职意向：高级软件⼯程师</p>
+      </div>
+      <div style="margin-left: auto;margin-top: 20px;">
+        <img src="images/avatar.jpg" alt="头像" style="height:127px">
+      </div>
+    </header>
+    <main>
+      <h4>⼯作经历</h4>
+      <section>
+        <div class="title">
+          <span class="company">携程计算机技术（上海）有限公司</span>
+          <span>高级软件工程师</span>
+          <span class="time">2020/08 -至今</span>
+        </div>
+        <div class="content row">
+          <p>内容：</p>
+          <ol>
+            <li>负责公司移动平台APP的火车票功能模块优化和开发</li>
+            <li>负责活动网站H5页面和接口开发以及部署</li>
+            <li>参与业务项目数据监控开发</li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p>业绩：</p>
+          <ol>
+            <li>实现公司抢票业务模块稳定迭代和收益增长</li>
+            <li>实现公司常用业务组件的封装和业务逻辑解耦</li>
+            <li>小程序增长业务的性能优化</li>
+          </ol>
+        </div>
+      </section>
+      <section class="mt20">
+        <div class="title">
+          <span class="company">深圳市房多多⽹络科技有限公司</span>
+          <span>软件⼯程师</span>
+          <span class="time">2017/08 - 2020/05</span>
+        </div>
+        <div class="content row">
+          <p>内容：</p>
+          <ol>
+            <li>参与公司房多多主⼩程序、好房速卖、⼆⼿联卖项⽬软件研发。</li>
+            <li>同后端⼯程师和UI设计师协作，负责软件项⽬的规划和页⾯的落地。</li>
+            <li>担任项⽬组scrum master，组织项⽬组⼈员稳定迭代。</li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p>业绩：</p>
+          <ol>
+            <li>带领团队实现从⽆到有⼩程序搭建和完善，  实现⽉均72万的访问量。</li>
+            <li>⼆⼿联卖项⽬沉淀业务通⽤组件，  简化开发⼯作量，  优化项⽬体验。</li>
+          </ol>
+        </div>
+      </section>
+      <section class="mt20">
+        <div class="title">
+          <span class="company">上海赐云⽹络科技有限公司</span>
+          <span>后端⼯程师</span>
+          <span class="time">2017/08 - 2020/05</span>
+        </div>
+        <div class="content row">
+          <p>内容：</p>
+          <ol>
+            <li>熟练使⽤HTML、  CSS、JavaScript 进⾏代码构建，  完成产品设计的视觉和交互。</li>
+            <li>理解和使用Java Spring，Mybaits 框架进行接口开发和后台管理系统开发。</li>
+            <li>使用 MySQL 数据库存储数据和优化数据查询。</li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p>业绩：</p>
+          <ol>
+            <li>带领团队实现从⽆到有⼩程序搭建和完善，  实现⽉均72万的访问量。</li>
+            <li>⼆⼿联卖项⽬沉淀业务通⽤组件，  简化开发⼯作量，  优化项⽬体验。</li>
+          </ol>
+        </div>
+      </section>
+      <div class="border mt20"></div>
+      <h4>项目经历</h4>
+      <section class="mt20">
+        <div class="title">
+          <span class="company">携程旅行</span>
+          <span>高级软件⼯程师</span>
+          <span class="time">2021/3 - 至今</span>
+        </div>
+        <div class="content row">
+          <p style="flex-shrink: 0;">内容：</p>
+          <ol>
+            <li>携程旅行火车票是用户购票出行主要平台。使用平台自研开发框架 React Native 实现抢票业务的相关功能模块开发，
+              包括下单，支付，改单等常规模块。</li>
+            <li>使用apm工具监控业务代码异常，prometheus grafana 监控常规业务数据</li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p>业绩：</p>
+          <ol>
+            <li>担任该业务软件项⽬的主要负责⼈，跟后端⼯程师配合，完成数据展⽰和页⾯交互。</li>
+            <li>通过React Native实现前端业务模块，包括车次，时间，坐席，以及乘客和跨站组件。</li>
+            <li>通过hickwall平台实现抢票高频业务数据的监控</li>
+          </ol>
+        </div>
+      </section>
+      <section class="mt20">
+        <div class="title">
+          <span class="company">智行火车票</span>
+          <span>高级软件⼯程师</span>
+          <span class="time">2020/10 - 2021/03</span>
+        </div>
+        <div class="content row">
+          <p style="flex-shrink: 0;">内容：</p>
+          <p class="pd40">智行火车票用户购票抢票平台。使用 Vuejs 搭建前端活动页面， NodeJS 实现页面接口以及数据处理。</p>
+        </div>
+        <div class="result row">
+          <p>业绩：</p>
+          <p class="pd40">完成智行火车票营销H5页面发布和后台数据维护，优化小程序分享页面性能，提升用户体验。</p>
+          </ol>
+        </div>
+      </section>
+      <section class="mt20">
+        <div class="title">
+          <span class="company">钉钉⼤屏</span>
+          <span>软件⼯程师</span>
+          <span class="time">2018/06 - 2019/06</span>
+        </div>
+        <div class="content row">
+          <p style="flex-shrink: 0;">内容：</p>
+          <ol>
+            <li>公司内部房源，交易，商户数据移动端可视化看板</li>
+            <li>前端使⽤ echart 实现图表可视化展⽰</li>
+            <li>后端使⽤ nodejs 和 sequelize 实现数据查询和聚合</li>
+          </ol>
+        </div>
+      </section>
+      <section class="mt20">
+        <div class="title">
+          <span class="company">学生赚APP</span>
+          <span>软件工程师</span>
+          <span class="time">2015/06 - 2016/06</span>
+        </div>
+        <div class="content row">
+          <p style="flex-shrink: 0;">内容：</p>
+          <ol>
+            <li>使用 Spring 开发后端数据接口，提供APP客户端使用。</li>
+            <li>使用 Java Servlet 开发后台数据管理界面，配置管理人员操作权限。</li>
+            <li>使用 Mysql 存储客户端数据，Mybatis 封装定制化SQL操作数据层。</li>
+          </ol>
+        </div>
+      </section>
+      <div class="border mt20"></div>
+      <section class="mt20">
+        <div class="title">
+          <span class="company">个⼈优势</span>
+        </div>
+        <div class="content row">
+          <ol>
+            <li>熟悉移动端跨平台开发框架React Native</li>
+            <li>熟悉项目开发流程，有一年带领团队开发经验</li>
+            <li>熟悉后端开发，⼀年Java后端开发经验</li>
+          </ol>
+        </div>
+      </section>
+      <div class="border mt20"></div>
+      <h4>教育经历</h4>
+      <section class="mt20">
+        <div class="title">
+          <span>湖北理⼯学院</span>
+          <span>本科 信息与计算科学</span>
+          <span class="time">2011-2015</span>
+        </div>
+      </section>
+      <div class="border mt20"></div>
+      <h4>资格证书</h4>
+      <section class="mt20">
+        <div>
+          <span class="cert">⼤学英语六级</span>
+          <span class="cert">计算机三级</span>
+          <span class="cert">程序员技术资格</span>
+        </div>
+      </section>
+    </main> -->
+  </body>
+<html>

@@ -15,6 +15,7 @@ var favList = [
   { id: 12, path: 'lib/13.m4a', name: '南山南', singer: '马頔', avatar: "lib/avatar/nanshannan.jpeg" },
   { id: 13, path: 'lib/14.m4a', name: '爱人错过', singer: '告五人', avatar: "lib/avatar/gaowuren.jpeg" },
   { id: 14, path: 'lib/15.m4a', name: 'Beautiful In White', singer: 'Westlife', avatar: "lib/avatar/westlife.jpeg" },
+  { id: 15, path: 'lib/16.m4a', name: '生日快乐', singer: '李雪莱', avatar: "lib/avatar/lin.jpeg" },
 ]
 
 function init() {
@@ -70,12 +71,24 @@ function initEvent() {
     }
 
     togglePlay(target)
+    loop()
   })
 
   let playBtn = document.getElementById('playbtn')
   let forwardBtn = document.getElementById('forwardbtn')
   playBtn.addEventListener('click', playAction)
   forwardBtn.addEventListener('click', forwardAction)
+}
+
+function loop(params) {
+  myAudio.addEventListener('ended', function() {
+    if (singleLoop) {
+      this.currentTime = 0;
+      this.play();
+    } else {
+      forwardAction()
+    }
+  }, false);
 }
 
 function getCurrentFavSong() {
