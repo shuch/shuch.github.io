@@ -1,54 +1,402 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>舒晨的前端工程师简历</title>
+    <meta charset="UTF-8">
+    <title>舒晨-资深前端开发工程师</title>
     <style>
+      * { box-sizing: border-box; }
       body {
-        width: 800px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333;
+        max-width: 800px;
         margin: 0 auto;
+        padding: 0;
+        background: #fff;
       }
-      h2 {
-        color: #32aa44;
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 28px 32px;
+        background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+        color: #fff;
       }
-      li + li {
-        margin-top: 10px;
+      header h1 {
+        margin: 0 0 8px 0;
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      header p {
+        margin: 4px 0;
+        font-size: 13px;
+        opacity: 0.95;
+      }
+      header img {
+        height: 100px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+      main {
+        padding: 32px 40px 40px;
+      }
+      h4 {
+        margin: 0 0 12px 0;
+        font-size: 12px;
+        font-weight: 600;
+        color: #1a365d;
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        border-bottom: 2px solid #1a365d;
+        padding-bottom: 6px;
+      }
+      section {
+        margin-bottom: 24px;
+      }
+      section:last-child { margin-bottom: 0; }
+      .section-block {
+        margin-bottom: 28px;
+      }
+      .section-block:last-child { margin-bottom: 0; }
+      .title {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .company {
+        font-size: 15px;
+        font-weight: 600;
+        color: #1a365d;
+      }
+      .title .role {
+        font-size: 13px;
+        color: #555;
+      }
+      .time {
+        margin-left: auto;
+        font-size: 12px;
+        color: #888;
+        font-weight: 500;
+      }
+      .content.row, .result.row {
+        display: flex;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .content.row > p:first-child, .result.row > p:first-child {
+        flex-shrink: 0;
+        margin: 0;
+        font-size: 13px;
+        color: #666;
+        min-width: 42px;
+      }
+      .content.row ol, .result.row ol {
+        margin: 0;
+        padding-left: 18px;
+        flex: 1;
+      }
+      .content.row li, .result.row li {
+        margin-bottom: 4px;
+      }
+      .content.row li:last-child, .result.row li:last-child {
+        margin-bottom: 0;
+      }
+      .pd40 {
+        padding-left: 0;
+        margin: 0;
+        flex: 1;
+      }
+      .project-item {
+        margin-top: 16px;
+        padding: 14px 16px 14px 20px;
+        border-left: 3px solid #2c5282;
+        background: #f8fafc;
+        border-radius: 0 4px 4px 0;
+      }
+      .project-item:first-child { margin-top: 12px; }
+      h5 {
+        margin: 20px 0 8px 0;
+        font-size: 12px;
+        font-weight: 600;
+        color: #4a5568;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+      }
+      .project-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: #2d3748;
+      }
+      .project-item .title {
+        margin-bottom: 6px;
+      }
+      .project-item .content.row, .project-item .result.row {
+        margin-top: 4px;
+      }
+      .project-item .content.row ol, .project-item .result.row ol {
+        padding-left: 16px;
+      }
+      .cert {
+        display: inline-block;
+        margin-right: 16px;
+        margin-bottom: 4px;
+        font-size: 13px;
+      }
+      .cert-section {
+        font-size: 13px;
+        color: #555;
+      }
+      .skills-grid {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 6px 16px;
+        align-items: baseline;
+        font-size: 13px;
+      }
+      .skill-label {
+        color: #666;
+        font-weight: 500;
+      }
+      .skill-value {
+        color: #333;
+      }
+      .border {
+        height: 0;
+        border: none;
+        margin: 24px 0;
+        border-top: 1px solid #e2e8f0;
+      }
+      @media print {
+        body { max-width: none; }
+        header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .project-item { background: #f8fafc; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       }
     </style>
   </head>
   
-  <body>
-    <h1>舒晨</h1>
-    <h2>前端工程师</h2>
-    <p>上海</p>
-    <p>17602151165</p>
-    <p>shuchery@gmail.com</p>
-    <h2>工作经验</h2>
-    <ul>
-      <li>2020.10.26/至今携程旅游</li>
-      <li>2017.8.7/2020.10.26房多多网络科技</li>
-    </ul>
-    <h2>项目经验</h2>
-    <ol>
-      <li>
-      好房速卖小程序
-      <p><b>技术实现</b>：taro, echart, react-redux</p>
-      <p><b>项目描述</b>：好房速卖是房多多业主卖房平台，使用react框架编写页面，react-redux处理数据流，使用echart 实现图表业务，通过taro打包编译成微信小程序平台代码。</p>
-      <p><b>职责描述</b>：担任项目的主要负责人，协同后端工程师UI设计师，负责项目整体的落地，发布维护和体验优化。</p>
-      </li>
-      <li>
-      优选联卖H5
-      <p><b>技术实现</b>：react hooks,css module,ssr,webpack</p>
-      <p><b>项目描述</b>：优选联卖是房多多经纪人合作卖房平台。前端采用react-hooks实现组件化，css module 处理样式，通过webpack 打包实现服务端渲染。</p>
-      <p><b>职责描述</b>：与交互工程师协作完成页面模块编写，配合后端开发实现产品功能和交互，总结和沉淀业务通用组件，简化开发工作量。</p>
-      </li>
-    </ol>
-    <h2>技术栈</h2>
-    <ol>
-      <li>JavaScript</li>
-      <li>HTML/CSS</li>
-      <li>Node/Express</li>
-      <li>React/React Native</li>
-    </ol>
-
+  <body id="pdf">
+    <header>
+      <div>
+        <h1>舒晨</h1>
+        <p>17602151165 · 2271728859@qq.com </p>
+        <p>10年工作经验 · 资深前端开发工程师 · 期望薪资 30-35K · 上海</p>
+      </div>
+      <img src="images/avatar.jpg" alt="头像">
+    </header>
+    <main>
+      <h4>个人优势</h4>
+      <section>
+        <div class="content row">
+          <ol>
+            <li>深入掌握JavaScript和TypeScript，具备扎实的编程基础和丰富的实践经验。</li>
+            <li>基于React/React Native主导携程火车票核心业务开发，支撑日均10万+访问量，主导性能优化使TTI提升30%。</li>
+            <li>拥有8年前端开发经验，积累了从0到1搭建项目的全面能力，同时具备2年的Java后端开发经验，能够在前后端协作中提供更全面的技术支持。</li>
+            <li>具备团队技术带教与项目管理经验，能够带领团队高效完成项目开发。</li>
+          </ol>
+        </div>
+      </section>
+      <div class="border"></div>
+      <h4>专业技能</h4>
+      <section>
+        <div class="skills-grid">
+          <span class="skill-label">精通</span>
+          <span class="skill-value">JavaScript / TypeScript / React / React Native</span>
+          <span class="skill-label">熟练</span>
+          <span class="skill-value">Node.js / Taro / Zustand / Webpack</span>
+          <span class="skill-label">了解</span>
+          <span class="skill-value">Java / Flutter / MySQL</span>
+        </div>
+      </section>
+      <div class="border"></div>
+      <h4>工作经历</h4>
+      <section class="section-block">
+        <div class="title">
+          <span class="company">携程旅游网络技术（上海）有限公司</span>
+          <span class="role">资深前端开发工程师</span>
+          <span class="time">2020.08 - 至今</span>
+        </div>
+        <div class="content row">
+          <p>内容：</p>
+          <ol>
+            <li>主导携程旅行APP火车票核心功能设计与实现，日均访问量10万+，保障用户流畅预订体验。</li>
+            <li>独立完成火车票增长H5页开发及Node.js服务接口设计、部署，项目稳定性显著提升。</li>
+            <li>推动搭建业务数据监控体系，实现异常快速定位与解决，保障业务稳定运行。</li>
+            <li>设计并落地跨端React Native组件库，统一开发规范，团队组件复用率提升。</li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p>业绩：</p>
+          <ol>
+            <li>主导公司React Native技术培训，推动跨平台框架落地，业务迭代效率提升。</li>
+            <li>推动业务组件重构与精简，减少代码冗余，优化打包体积，团队开发效率大幅提升。</li>
+          </ol>
+        </div>
+        <div>
+          <h5>项目经历</h5>
+          <div class="project-item">
+            <div class="title">
+              <span class="project-name">携程旅行APP汽车列表页重构</span>
+              <span class="time">2025.07 - 2026.01</span>
+            </div>
+            <div class="content row">
+              <p style="flex-shrink: 0;">内容：</p>
+              <ol>
+                <li>主导基于xtaro多端框架重构Flutter汽车列表页，提升需求交付效率，精简业务逻辑，降低维护成本。</li>
+                <li>采用技术：react-native、zustand、flashlist</li>
+                <li>性能优化：延迟渲染，日历、推荐卡片、多栏列表优先渲染可见部分；状态管理，使用zustand状态管理进行细粒度订阅，减少组件重复渲染；虚拟列表，使用原生flashList代替rn的flatList，支持组件复用，减少内存开销；TTI优化，通过计算屏幕可视区域比例来优化页面TTI指标，降低白屏率；体验优化，设置请求标记，优化竞态请求响应，防止页面闪烁。</li>
+              </ol>
+            </div>
+            <div class="result row">
+              <p>业绩：</p>
+              <ol>
+                <li>对iOS平台预加载优化，页面TTI提升30%。</li>
+                <li>推动BI拆分汽车、小车、火车、船、智能中转推荐等转化指标，出票量维持正向。</li>
+              </ol>
+            </div>
+          </div>
+          <div class="project-item">
+            <div class="title">
+              <span class="project-name">携程火车票保险代理多端组件库</span>
+              <span class="time">2025.10 - 2025.12</span>
+            </div>
+            <div class="content row">
+              <p style="flex-shrink: 0;">内容：</p>
+              <ol>
+                <li>主导设计携程火车票汽船业务保险代理模块，实现数据与UI隔离、独立部署。</li>
+                <li>攻克火汽船多业务适配及APP/小程序/H5多端兼容难点，采用xtaro多端组件库方案，通过npm包独立引入。</li>
+                <li>项目收益：保险模块独立可维护，多端开发效率提升。</li>
+              </ol>
+            </div>
+          </div>
+          <div class="project-item">
+            <div class="title">
+              <span class="project-name">携程旅行APP火车票订单详情性能优化</span>
+              <span class="time">2024.01 - 2025.01</span>
+            </div>
+            <div class="content row">
+              <p style="flex-shrink: 0;">内容：</p>
+              <ol>
+                <li>主导火车票订单详情页性能优化，通过性能分析定位问题，采用以下技术手段显著提升加载效率：</li>
+                <li>优化数据加载流程，利用BFF（Backend for Frontend）层对接口进行聚合，减少多次请求带来的延迟，显著提升数据获取速度。</li>
+                <li>页面渲染加速，应用React批量渲染技术，优化组件渲染逻辑，缩短页面首屏加载时间。</li>
+                <li>资源加载优化，实现资源按需加载与延迟加载策略，降低大文件对首屏加载性能的影响，首屏加载时间缩短约500ms。</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section-block">
+        <div class="title">
+          <span class="company">深圳市房多多网络科技有限公司</span>
+          <span class="role">前端开发工程师</span>
+          <span class="time">2017.08 - 2020.05</span>
+        </div>
+        <div class="content row">
+          <p>内容：</p>
+          <ol>
+            <li>主导房多多小程序从0到1搭建，上线后日均访问量达72万；主导好房速卖、联卖项目前端研发。</li>
+            <li>主导前端项目规划与落地，推动前后端及UI协作，保障需求高效交付。</li>
+            <li>担任项目组 scrum master，组织团队稳定迭代，把控开发节奏。</li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p>业绩：</p>
+          <ol>
+            <li>沉淀联卖业务通用组件，开发效率提升，项目体验优化。</li>
+          </ol>
+        </div>
+        <div>
+          <h5>项目经历</h5>
+          <div class="project-item">
+            <div class="title">
+              <span class="project-name">好房速卖小程序</span>
+              <span class="time">2019.06 - 2020.02</span>
+            </div>
+            <div class="content row">
+              <p style="flex-shrink: 0;">内容：</p>
+              <p class="pd40">主导房多多C端业主卖房平台开发，采用React+react-redux+echart，通过Taro编译为微信小程序，实现图表等核心业务。</p>
+            </div>
+            <div class="result row">
+              <p>业绩：</p>
+              <p class="pd40">主导项目整体落地，推动前后端及UI协作，完成发布维护和体验优化。</p>
+            </div>
+          </div>
+          <div class="project-item">
+            <div class="title">
+              <span class="project-name">钉钉大屏</span>
+              <span class="time">2018.06 - 2019.06</span>
+            </div>
+            <div class="content row">
+              <p style="flex-shrink: 0;">内容：</p>
+              <ol>
+                <li>主导公司内部房源、交易、商户数据移动端可视化看板搭建</li>
+                <li>前端使用echart实现图表可视化，后端使用Node.js+Sequelize实现数据查询与聚合</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section-block">
+        <div class="title">
+          <span class="company">上海赐云网络科技有限公司</span>
+          <span class="role">前端工程师</span>
+          <span class="time">2015.06 - 2017.07</span>
+        </div>
+        <div class="content row">
+          <p>内容：</p>
+          <ol>
+            <li>独立完成官网及H5页面前端开发，实现产品视觉与交互，保障浏览器兼容性。</li>
+            <li>负责前后端数据对接与效果展示，推动接口联调落地。</li>
+            <li>主导前端技术选型，推动Web前沿技术探索与实践。</li>
+            <li>收集用户反馈，持续优化网站性能和用户体验。</li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p>业绩：</p>
+          <ol>
+            <li>带领技术团队制定工作计划、分配任务，减少沟通成本。</li>
+            <li>设计通用UI组件库，提升开发效率，节约开发时间。</li>
+          </ol>
+        </div>
+      </section>
+      <div class="border"></div>
+      <h4>教育经历</h4>
+      <section>
+        <div class="title">
+          <span>湖北理工学院</span>
+          <span>本科 信息与计算科学</span>
+          <span class="time">2011-2015</span>
+        </div>
+      </section>
+      <div class="border"></div>
+      <h4>资格证书</h4>
+      <section>
+        <div class="cert-section">
+          <span class="cert">计算机三级</span>
+          <span class="cert">大学英语六级</span>
+          <span class="cert">全国计算机技术与软件专业技术资格（程序员）</span>
+        </div>
+      </section>
+    </main>
   </body>
-<html>
+</html>
+
+<!-- <section class="mt20">
+  <div class="title">
+    <span class="company">学生赚APP</span>
+    <span>软件工程师</span>
+    <span class="time">2015/06 - 2016/06</span>
+  </div>
+  <div class="content row">
+    <p style="flex-shrink: 0;">内容：</p>
+    <ol>
+      <li>使用 Spring 开发后端数据接口，提供APP客户端使用。</li>
+      <li>使用 Java Servlet 开发后台数据管理界面，配置管理人员操作权限。</li>
+      <li>使用 Mysql 存储客户端数据，Mybatis 封装定制化SQL操作数据层。</li>
+    </ol>
+  </div>
+</section> -->
