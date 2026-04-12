@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <title>舒晨 · 高级前端工程师</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        font-size: 13.5px;
+        line-height: 1.52;
+        color: #222;
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0;
+        background: #fff;
+      }
+      .resume-header {
+        padding: 20px 28px 16px;
+        /* border-bottom: 2px solid #1a365d; */
+      }
+      .resume-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 23px;
+        font-weight: 600;
+        color: #1a365d;
+        letter-spacing: 0.5px;
+      }
+      .resume-intent {
+        margin: 0 0 8px 0;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #1e90ff;
+      }
+      .resume-contact {
+        margin: 0;
+        font-size: 13px;
+        color: #444;
+        line-height: 1.72;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 4px;
+        align-items: center;
+      }
+      .resume-contact .sep {
+        color: #ccc;
+        margin: 0 6px;
+        user-select: none;
+      }
+      main {
+        padding: 14px 28px 22px;
+      }
+      h4 {
+        margin: 0 0 8px 0;
+        font-size: 12px;
+        font-weight: 600;
+        color: #1e90ff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        /* border-bottom: 1px solid #cbd5e0; */
+        border-bottom: 2px solid #1a365d;
+        padding-bottom: 4px;
+      }
+      section {
+        margin-bottom: 14px;
+      }
+      section:last-child { margin-bottom: 0; }
+      .summary {
+        margin: 0;
+        padding-left: 16px;
+        font-size: 13px;
+        color: #333;
+        line-height: 1.58;
+      }
+      .summary li { margin-bottom: 3px; }
+      .summary li:last-child { margin-bottom: 0; }
+      .skills-inline {
+        margin: 0;
+        font-size: 13px;
+        color: #333;
+        line-height: 1.62;
+      }
+      .skills-inline .k {
+        display: inline-block;
+        min-width: 5.5em;
+        color: #1a365d;
+        font-weight: 600;
+        margin-right: 4px;
+      }
+      .work-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      .work-table td {
+        padding: 5px 8px 5px 0;
+        vertical-align: top;
+        border-bottom: 1px solid #edf2f7;
+      }
+      .work-table tr:last-child td { border-bottom: none; }
+      .work-table .co {
+        font-weight: 600;
+        color: #1a365d;
+        width: 42%;
+      }
+      .work-table .role { color: #444; width: 28%; }
+      .work-table .period {
+        color: #718096;
+        text-align: right;
+        white-space: nowrap;
+        width: 30%;
+      }
+      .project-block {
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #edf2f7;
+      }
+      .project-block:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+      .project-head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 6px 10px;
+        margin-bottom: 4px;
+      }
+      .project-name {
+        font-size: 13.5px;
+        font-weight: 600;
+        color: #2d3748;
+      }
+      .project-time {
+        font-size: 12px;
+        color: #718096;
+        margin-left: auto;
+      }
+      .project-block ul {
+        margin: 0;
+        padding-left: 16px;
+        font-size: 13px;
+        color: #333;
+        line-height: 1.56;
+      }
+      .project-block li { margin-bottom: 2px; }
+      .project-block li:last-child { margin-bottom: 0; }
+      .footer-edu-cert {
+        font-size: 12.5px;
+        color: #555;
+        line-height: 1.56;
+      }
+      .footer-edu-cert p {
+        margin: 0;
+      }
+      .footer-edu-cert hr {
+        border: none;
+        border-top: 1px solid #edf2f7;
+        margin: 10px 0;
+      }
+      .footer-edu-cert strong {
+        color: #1a365d;
+        font-weight: 600;
+        margin-right: 4px;
+      }
+      @media print {
+        body { max-width: none; font-size: 12px; }
+        .resume-header { padding: 12px 20px 10px; }
+        main { padding: 10px 20px 16px; }
+        section { margin-bottom: 10px; }
+        .project-block { break-inside: avoid; }
+      }
+    </style>
+  </head>
+  <body id="pdf">
+    <header class="resume-header">
+      <h1>舒晨</h1>
+      <p class="resume-intent">高级前端工程师</p>
+      <p class="resume-contact">
+        <span>17602151165</span><span class="sep">|</span>
+        <span>微信：同手机号</span><span class="sep">|</span>
+        <span>2271728859@qq.com</span><span class="sep">|</span>
+        <span>现居地：上海</span>
+      </p>
+    </header>
+    <main>
+      <h4>专业概要</h4>
+      <section>
+        <ul class="summary">
+          <li>10 年前端经验，深耕 <strong>React / React Native / TypeScript</strong>，携程火车票核心业务与性能优化（TTI、首屏、跨端）。</li>
+          <li>具备 <strong>工程化、组件库与多端（APP·小程序·H5）</strong> 落地经验，可承担架构设计与技术攻坚。</li>
+        </ul>
+      </section>
+
+      <h4>专业技能</h4>
+      <section>
+        <p class="skills-inline"><span class="k">语言</span>HTML · CSS · JavaScript · TypeScript</p>
+        <p class="skills-inline" style="margin-top:4px;"><span class="k">框架</span>React · React Native · Vue3 · Zustand · Redux Toolkit</p>
+        <p class="skills-inline" style="margin-top:4px;"><span class="k">工程化</span>Webpack · Vite · Node.js · XTaro / Taro</p>
+      </section>
+
+      <h4>工作经历</h4>
+      <section>
+        <table class="work-table" role="presentation">
+          <tr>
+            <td class="co">携程旅游网络技术（上海）有限公司</td>
+            <td class="role">高级前端开发工程师</td>
+            <td class="period">2020.08 — 至今</td>
+          </tr>
+          <tr>
+            <td class="co">深圳市房多多网络科技有限公司</td>
+            <td class="role">前端开发工程师</td>
+            <td class="period">2017.08 — 2020.05</td>
+          </tr>
+          <tr>
+            <td class="co">上海赐云网络科技有限公司</td>
+            <td class="role">前端工程师</td>
+            <td class="period">2015.06 — 2017.07</td>
+          </tr>
+        </table>
+      </section>
+
+      <h4>核心项目</h4>
+      <section>
+        <div class="project-block">
+          <div class="project-head">
+            <span class="project-name">携程旅行 APP · 汽车列表页重构（XTaro）</span>
+            <span class="project-time">2025.03 — 2025.07</span>
+          </div>
+          <ul>
+            <li>主导基于 XTaro 的多端列表重构，Zustand 细粒度订阅 + FlashList 虚拟列表，延迟渲染与首屏策略降低无效渲染。</li>
+            <li><strong>结果：</strong>TTI 约 500ms → 300ms（约 +40%），白屏与竞态闪烁治理；BI 转化指标拆分支撑业务决策。</li>
+          </ul>
+        </div>
+        <div class="project-block">
+          <div class="project-head">
+            <span class="project-name">携程火车票 · 保险代理多端组件库</span>
+            <span class="project-time">2025.10 — 2025.12</span>
+          </div>
+          <ul>
+            <li>火/汽/船多业务保险模块统一：XTaro 组件库、数据与 UI 隔离、可配置差异化展示，文档与设计规范对齐。</li>
+            <li><strong>结果：</strong>APP / 小程序 / H5 一套代码交付；同类需求交付周期约缩短 50%，跨业务组件复用约 +30%。</li>
+          </ul>
+        </div>
+        <div class="project-block">
+          <div class="project-head">
+            <span class="project-name">携程旅行 APP · 火车票订单详情性能优化</span>
+            <span class="project-time">2024.01 — 2025.01</span>
+          </div>
+          <ul>
+            <li>BFF 接口聚合减少串行请求；React 批量渲染与按需/延迟加载，缩短首屏与可交互时间。</li>
+            <li><strong>结果：</strong>订单详情 TTI 约 600ms → 400ms（约 +30%）；推动监控体系，异常定位与稳定性提升。</li>
+          </ul>
+        </div>
+        <div class="project-block">
+          <div class="project-head">
+            <span class="project-name">携程火车票 · 智能 AI 对话页</span>
+            <span class="project-time">2026.01 — 2026.03</span>
+          </div>
+          <ul>
+            <li>SSE 流式输出与连接生命周期管理（退出/异常安全关闭）；RTK 统一对话态，Thunk 收敛异步与增量同步。</li>
+            <li>多类型消息渲染（思考过程、推荐/智慧购票卡片）与多轮追问、预订跳转等核心交互落地。</li>
+          </ul>
+        </div>
+      </section>
+
+      <h4>教育与其他</h4>
+      <section>
+        <div class="footer-edu-cert">
+          <p><strong>教育</strong>湖北理工学院 · 本科 · 信息与计算科学 · 2011—2015</p>
+          <hr>
+          <p><strong>证书</strong>英语六级 · 计算机三级 · 全国计算机技术与软件专业技术资格（程序员）</p>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
