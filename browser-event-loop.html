@@ -1,0 +1,289 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:1rem 0;font-family:var(--font-sans)}
+.stepper-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.step-pills{display:flex;gap:4px;flex-wrap:wrap}
+.step-pill{width:10px;height:10px;border-radius:50%;background:var(--color-border-tertiary);transition:background .2s,transform .2s;cursor:pointer;border:none;padding:0}
+.step-pill.active{background:var(--color-text-secondary);transform:scale(1.3)}
+.step-pill.done{background:var(--color-border-primary)}
+.nav-btns{display:flex;gap:6px}
+.nav-btn{padding:5px 14px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;font-size:13px;color:var(--color-text-primary);font-family:var(--font-sans)}
+.nav-btn:hover{background:var(--color-background-secondary)}
+.nav-btn:disabled{opacity:0.35;cursor:default}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);overflow:hidden}
+.card-header{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:0.5px solid var(--color-border-tertiary)}
+.phase-icon{width:32px;height:32px;border-radius:var(--border-radius-md);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:500;flex-shrink:0}
+.phase-title{font-size:15px;font-weight:500;color:var(--color-text-primary)}
+.phase-subtitle{font-size:12px;color:var(--color-text-secondary);margin-top:2px}
+.card-body{padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.thread-vis{display:flex;flex-direction:column;gap:8px}
+.thread-label{font-size:11px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.thread-row{display:flex;align-items:center;gap:8px}
+.thread-name{font-size:12px;color:var(--color-text-secondary);min-width:60px;flex-shrink:0}
+.thread-bar-wrap{flex:1;height:24px;background:var(--color-background-secondary);border-radius:4px;overflow:hidden;position:relative;border:0.5px solid var(--color-border-tertiary)}
+.thread-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 8px;font-size:11px;font-weight:500;transition:width .35s,background .35s,color .35s;white-space:nowrap;overflow:hidden}
+.thread-idle{background:transparent;color:var(--color-text-tertiary);font-size:11px;padding:0 8px;line-height:24px}
+.detail-panel{display:flex;flex-direction:column;gap:8px}
+.detail-label{font-size:11px;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.04em;margin-bottom:4px}
+.detail-item{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--color-background-secondary);border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary)}
+.di-dot{width:7px;height:7px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.di-text{font-size:12px;color:var(--color-text-secondary);line-height:1.5}
+.di-text strong{color:var(--color-text-primary);font-weight:500}
+.warning-box{padding:8px 10px;background:var(--color-background-warning);border:0.5px solid var(--color-border-warning);border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-warning);line-height:1.5}
+.tip-box{padding:8px 10px;background:var(--color-background-success);border:0.5px solid var(--color-border-success);border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-success);line-height:1.5}
+.info-box{padding:8px 10px;background:var(--color-background-info);border:0.5px solid var(--color-border-info);border-radius:var(--border-radius-md);font-size:12px;color:var(--color-text-info);line-height:1.5}
+.timeline-strip{margin-top:12px;padding:12px 16px;border-top:0.5px solid var(--color-border-tertiary)}
+.tl-label{font-size:11px;color:var(--color-text-tertiary);margin-bottom:8px}
+.tl-bar{display:flex;align-items:center;gap:2px;height:20px}
+.tl-seg{height:100%;border-radius:3px;font-size:10px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.9);font-weight:500;transition:opacity .3s;cursor:default}
+.tl-seg.dim{opacity:.25}
+.tl-seg.lit{opacity:1}
+@media(max-width:500px){.card-body{grid-template-columns:1fr}}
+</style>
+<div class="wrap">
+<div class="stepper-header">
+  <div class="step-pills" id="pills"></div>
+  <div class="nav-btns">
+    <button class="nav-btn" id="btn-prev" onclick="go(-1)">← 上一步</button>
+    <button class="nav-btn" id="btn-next" onclick="go(1)">下一步 →</button>
+  </div>
+</div>
+
+<div class="card" id="main-card">
+  <div class="card-header">
+    <div class="phase-icon" id="ph-icon"></div>
+    <div>
+      <div class="phase-title" id="ph-title"></div>
+      <div class="phase-subtitle" id="ph-sub"></div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="thread-vis">
+      <div class="thread-label">主线程占用</div>
+      <div class="thread-row">
+        <div class="thread-name">JS 引擎</div>
+        <div class="thread-bar-wrap"><div class="thread-bar" id="bar-js"></div></div>
+      </div>
+      <div class="thread-row">
+        <div class="thread-name">Style/Layout</div>
+        <div class="thread-bar-wrap"><div class="thread-bar" id="bar-layout"></div></div>
+      </div>
+      <div class="thread-row">
+        <div class="thread-name">Paint</div>
+        <div class="thread-bar-wrap"><div class="thread-bar" id="bar-paint"></div></div>
+      </div>
+      <div class="thread-row" style="margin-top:2px">
+        <div class="thread-name" style="font-size:11px;color:var(--color-text-tertiary)">合成线程</div>
+        <div class="thread-bar-wrap"><div class="thread-bar" id="bar-comp"></div></div>
+      </div>
+      <div id="extra-box" style="margin-top:4px"></div>
+    </div>
+    <div class="detail-panel">
+      <div class="detail-label">本阶段说明</div>
+      <div id="details"></div>
+    </div>
+  </div>
+  <div class="timeline-strip">
+    <div class="tl-label">一帧（~16ms）时间轴</div>
+    <div class="tl-bar" id="tl-bar"></div>
+  </div>
+</div>
+</div>
+
+<script>
+const TL = [
+  {label:'宏任务',w:22,color:'#5C6BC0'},
+  {label:'微任务',w:8,color:'#1D9E75'},
+  {label:'rAF',w:8,color:'#EF8B2C'},
+  {label:'Style',w:8,color:'#D85A30'},
+  {label:'Layout',w:12,color:'#D85A30'},
+  {label:'Paint',w:10,color:'#D4537E'},
+  {label:'Composite',w:14,color:'#378ADD'},
+  {label:'空闲',w:18,color:'#888780'},
+];
+
+const steps = [
+  {
+    icon:'①',iconBg:'#EEEDFE',iconColor:'#3C3489',
+    title:'宏任务执行（Macrotask）',
+    sub:'事件循环取出一个任务，JS 引擎独占主线程',
+    js:{w:'70%',bg:'#5C6BC0',text:'JS 执行（script / setTimeout / 事件回调）'},
+    layout:{idle:true},paint:{idle:true},comp:{w:'30%',bg:'#B4B2A9',text:'等待'},
+    tlActive:[0],
+    details:[
+      {dot:'#5C6BC0',html:'<strong>单线程</strong>：JS 引擎和渲染共用主线程，宏任务执行时渲染<strong>完全暂停</strong>'},
+      {dot:'#5C6BC0',html:'来源：<code>script</code> 初始化、<code>setTimeout</code>、<code>setInterval</code>、I/O 回调、DOM 事件'},
+      {dot:'#888780',html:'合成线程独立，可继续处理已光栅化图层的滚动/变换，这是 <code>transform</code> 动画流畅的原因'},
+    ],
+    extra:{type:'warning',text:'若 JS 任务超过 16ms → 本帧渲染被推迟 → 掉帧（jank）'}
+  },
+  {
+    icon:'②',iconBg:'#E1F5EE',iconColor:'#085041',
+    title:'微任务队列清空（Microtask checkpoint）',
+    sub:'宏任务结束后立即执行，直到队列为空',
+    js:{w:'55%',bg:'#1D9E75',text:'Promise.then / queueMicrotask / MutationObserver'},
+    layout:{idle:true},paint:{idle:true},comp:{w:'30%',bg:'#B4B2A9',text:'等待'},
+    tlActive:[0,1],
+    details:[
+      {dot:'#1D9E75',html:'<strong>清空原则</strong>：微任务队列必须全部跑完，哪怕微任务里又产生新微任务'},
+      {dot:'#1D9E75',html:'<code>Promise.then</code>、<code>async/await</code>（后续代码）、<code>queueMicrotask</code>、<code>MutationObserver</code>'},
+      {dot:'#D85A30',html:'微任务期间触发的 DOM 变更会被<strong>合并</strong>，等进入渲染阶段统一 recalculate'},
+    ],
+    extra:{type:'info',text:'React 18 的 automatic batching 正是在微任务里统一 flush，所以无论哪里的 setState 都能批处理'}
+  },
+  {
+    icon:'③',iconBg:'#FAEEDA',iconColor:'#633806',
+    title:'requestAnimationFrame 回调',
+    sub:'浏览器决定本帧需要渲染时，在 Style 之前调用',
+    js:{w:'40%',bg:'#EF8B2C',text:'rAF 回调（动画逻辑）'},
+    layout:{idle:true},paint:{idle:true},comp:{w:'30%',bg:'#B4B2A9',text:'等待'},
+    tlActive:[0,1,2],
+    details:[
+      {dot:'#EF8B2C',html:'<strong>时机</strong>：不是每个 tick 都触发，浏览器判断"本帧需要渲染"才调用，约 60fps'},
+      {dot:'#EF8B2C',html:'rAF 是做动画的正确位置：在渲染前执行，改的值直接进当帧 Layout，无额外延迟'},
+      {dot:'#888780',html:'与 <code>setTimeout(fn, 16)</code> 的区别：rAF 与屏幕刷新率同步，后台标签页自动暂停'},
+    ],
+    extra:{type:'tip',text:'动画应用 rAF 而非 setTimeout：精准与帧同步，且自动跟随屏幕刷新率（90fps / 120fps 屏均适配）'}
+  },
+  {
+    icon:'④',iconBg:'#FAECE7',iconColor:'#712B13',
+    title:'Style 重计算 + Layout（回流）',
+    sub:'计算每个元素的样式和几何位置',
+    js:{w:'20%',bg:'#B4B2A9',text:'空闲'},
+    layout:{w:'75%',bg:'#D85A30',text:'Recalculate Style → Layout（回流）'},
+    paint:{idle:true},comp:{w:'30%',bg:'#B4B2A9',text:'等待'},
+    tlActive:[0,1,2,3,4],
+    details:[
+      {dot:'#D85A30',html:'<strong>Style</strong>：将 CSS 规则匹配到每个 DOM 节点，计算 computed style'},
+      {dot:'#D85A30',html:'<strong>Layout</strong>：根据盒模型计算每个节点的位置和尺寸，触发条件：读 <code>offsetWidth</code>、改 <code>width</code> 等'},
+      {dot:'#A32D2D',html:'在 JS 中交替"写几何属性→读几何属性"会强制触发<strong>同步 Layout</strong>（强制回流），极耗性能'},
+    ],
+    extra:{type:'warning',text:'避免强制同步回流：批量写完再统一读，或用 getBoundingClientRect 在 rAF 后读取'}
+  },
+  {
+    icon:'⑤',iconBg:'#FBEAF0',iconColor:'#72243E',
+    title:'Paint（光栅化）',
+    sub:'将布局树转换为像素，记录绘制指令',
+    js:{w:'20%',bg:'#B4B2A9',text:'空闲'},
+    layout:{w:'20%',bg:'#B4B2A9',text:'空闲'},
+    paint:{w:'75%',bg:'#D4537E',text:'Paint → 生成绘制列表 → 光栅化'},
+    comp:{w:'30%',bg:'#B4B2A9',text:'等待图层'},
+    tlActive:[0,1,2,3,4,5],
+    details:[
+      {dot:'#D4537E',html:'<strong>Paint</strong>：遍历布局树，生成绘制记录（"在坐标 x,y 画一个红色矩形"）'},
+      {dot:'#D4537E',html:'触发 Paint 的属性：<code>color</code>、<code>background</code>、<code>border</code>、<code>box-shadow</code> 等视觉属性'},
+      {dot:'#378ADD',html:'只改 <code>transform</code>/<code>opacity</code> 不触发 Paint → 跳到 Composite → 更流畅'},
+    ],
+    extra:{type:'tip',text:'用 Chrome DevTools → Layers 面板查看哪些元素被提升为独立图层，理解 will-change 的作用'}
+  },
+  {
+    icon:'⑥',iconBg:'#E6F1FB',iconColor:'#0C447C',
+    title:'Composite（合成）',
+    sub:'合成线程将图层合并上屏，JS 主线程已释放',
+    js:{w:'20%',bg:'#B4B2A9',text:'可执行下一任务'},
+    layout:{idle:true},paint:{idle:true},
+    comp:{w:'80%',bg:'#378ADD',text:'合成线程：图层合并 → GPU 提交 → 上屏'},
+    tlActive:[0,1,2,3,4,5,6],
+    details:[
+      {dot:'#378ADD',html:'<strong>合成在独立线程</strong>：主线程已可以开始下一个事件循环，两者并行'},
+      {dot:'#378ADD',html:'GPU 加速图层（<code>transform: translateZ(0)</code>）在此阶段直接由 GPU 合并，极快'},
+      {dot:'#1D9E75',html:'<code>transform</code> + <code>opacity</code> 动画仅触发 Composite，不需要 Layout/Paint → 60fps 的秘密'},
+    ],
+    extra:{type:'tip',text:'Composite 独立于主线程 → 即使 JS 卡顿，已提交的合成动画（transform/opacity）仍然流畅'}
+  },
+  {
+    icon:'⑦',iconBg:'#F1EFE8',iconColor:'#444441',
+    title:'空闲时间（Idle）',
+    sub:'本帧剩余时间，requestIdleCallback 在此执行',
+    js:{w:'35%',bg:'#888780',text:'requestIdleCallback / 空闲'},
+    layout:{idle:true},paint:{idle:true},comp:{w:'15%',bg:'#B4B2A9',text:'完成'},
+    tlActive:[0,1,2,3,4,5,6,7],
+    details:[
+      {dot:'#888780',html:'<strong>空闲时间</strong>：16ms 帧周期内，渲染完成后剩余的时间'},
+      {dot:'#888780',html:'<code>requestIdleCallback</code> 在此执行，参数携带 <code>timeRemaining()</code> 告诉你还剩多少时间'},
+      {dot:'#5C6BC0',html:'下一个宏任务开始，进入新一轮循环 ↻'},
+    ],
+    extra:{type:'info',text:'React Scheduler 参考了 rIC 的思路，用时间切片（5ms 预算）来保证高优先级任务不被长时间阻塞'}
+  },
+];
+
+let cur = 0;
+
+function buildTl(activeSet) {
+  const bar = document.getElementById('tl-bar');
+  bar.innerHTML = '';
+  const total = TL.reduce((s,t)=>s+t.w,0);
+  TL.forEach((t,i)=>{
+    const seg = document.createElement('div');
+    seg.className = 'tl-seg ' + (activeSet.includes(i)?'lit':'dim');
+    seg.style.cssText = `width:${t.w/total*100}%;background:${t.color}`;
+    seg.title = t.label;
+    seg.textContent = t.w > 10 ? t.label : '';
+    bar.appendChild(seg);
+  });
+}
+
+function buildPills() {
+  const c = document.getElementById('pills');
+  c.innerHTML = '';
+  steps.forEach((_,i)=>{
+    const b = document.createElement('button');
+    b.className = 'step-pill' + (i===cur?' active': i<cur?' done':'');
+    b.onclick = ()=>{ cur=i; render(); };
+    c.appendChild(b);
+  });
+}
+
+function bar(el, s) {
+  const e = document.getElementById(el);
+  if(!e) return;
+  if(s && s.idle) {
+    e.style.width='0';
+    e.className='thread-bar';
+    e.textContent='';
+    e.parentElement.innerHTML = `<div class="thread-idle">—</div>`;
+    return;
+  }
+  e.parentElement.innerHTML = `<div class="thread-bar" id="${el}" style="width:${s.w};background:${s.bg};color:#fff">${s.text}</div>`;
+}
+
+function render() {
+  const s = steps[cur];
+  document.getElementById('ph-icon').style.cssText=`background:${s.iconBg};color:${s.iconColor}`;
+  document.getElementById('ph-icon').textContent=s.icon;
+  document.getElementById('ph-title').textContent=s.title;
+  document.getElementById('ph-sub').textContent=s.sub;
+
+  bar('bar-js', s.js);
+  bar('bar-layout', s.layout && !s.layout.idle ? s.layout : {idle:true});
+  bar('bar-paint', s.paint && !s.paint.idle ? s.paint : {idle:true});
+  bar('bar-comp', s.comp);
+
+  const ex = document.getElementById('extra-box');
+  if(s.extra) {
+    const cls = s.extra.type==='warning'?'warning-box':s.extra.type==='tip'?'tip-box':'info-box';
+    ex.innerHTML = `<div class="${cls}">${s.extra.text}</div>`;
+  } else { ex.innerHTML=''; }
+
+  const det = document.getElementById('details');
+  det.innerHTML = s.details.map(d=>`
+    <div class="detail-item">
+      <div class="di-dot" style="background:${d.dot}"></div>
+      <div class="di-text">${d.html}</div>
+    </div>`).join('');
+
+  buildTl(s.tlActive);
+  buildPills();
+
+  document.getElementById('btn-prev').disabled = cur===0;
+  document.getElementById('btn-next').textContent = cur===steps.length-1 ? '↻ 从头开始' : '下一步 →';
+}
+
+function go(dir) {
+  cur = (cur + dir + steps.length) % steps.length;
+  render();
+}
+
+render();
+</script>
