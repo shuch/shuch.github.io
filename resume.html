@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <title>舒晨-高级前端开发工程师</title>
     <style>
+      :root {
+        --accent: #1e90ff;
+        --accent-dark: #1478cc;
+        --accent-heading: #0f6bb8;
+        --project-sep: #e8eef5;
+      }
       * { box-sizing: border-box; }
       body {
         font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
@@ -15,32 +21,47 @@
         padding: 0;
         background: #fff;
       }
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 28px 32px;
-        background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
-        color: #fff;
+      .resume-header {
+        padding: 20px 40px 16px;
       }
-      header h1 {
-        margin: 0 0 8px 0;
-        font-size: 28px;
+      .resume-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 23px;
         font-weight: 600;
+        color: var(--accent-heading);
         letter-spacing: 0.5px;
       }
-      header p {
-        margin: 4px 0;
-        font-size: 13px;
-        opacity: 0.95;
+      .resume-intent {
+        margin: 0 0 8px 0;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--accent);
       }
-      .header-avatar {
-        width: 100px;
-        height: 100px;
-        border-radius: 3px;
-        object-fit: cover;
-        object-position: center calc(50% + 6px);
+      .resume-contact {
+        margin: 0;
+        font-size: 13px;
+        color: #444;
+        line-height: 1.72;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 4px;
+        align-items: center;
+      }
+      .resume-contact .sep {
+        color: #ccc;
+        margin: 0 6px;
+        user-select: none;
+      }
+      .resume-contact-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .resume-contact-icon {
+        width: 16px;
+        height: 16px;
         flex-shrink: 0;
+        color: var(--accent);
       }
       main {
         padding: 32px 40px 40px;
@@ -49,10 +70,10 @@
         margin: 0 0 12px 0;
         font-size: 12px;
         font-weight: 600;
-        color: #1a365d;
+        color: var(--accent);
         text-transform: uppercase;
         letter-spacing: 1.2px;
-        border-bottom: 2px solid #1a365d;
+        border-bottom: 1.5px solid var(--accent);
         padding-bottom: 6px;
       }
       section {
@@ -73,7 +94,7 @@
       .company {
         font-size: 15px;
         font-weight: 600;
-        color: #1a365d;
+        color: var(--accent-heading);
       }
       .title .role {
         font-size: 13px;
@@ -114,25 +135,22 @@
         flex: 1;
       }
       .project-item {
-        margin-top: 16px;
-        padding: 14px 16px 14px 20px;
-        border-left: 3px solid #2c5282;
-        background: #f8fafc;
-        border-radius: 0 4px 4px 0;
+        margin-top: 0;
+        padding: 14px 0 16px 0;
+        border-bottom: 1px solid var(--project-sep);
       }
-      .project-item:first-child { margin-top: 12px; }
-      h5 {
-        margin: 20px 0 8px 0;
-        font-size: 12px;
-        font-weight: 600;
-        color: #4a5568;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
+      .project-item:first-child {
+        margin-top: 12px;
+        padding-top: 0;
+      }
+      .project-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
       }
       .project-name {
         font-size: 14px;
         font-weight: 600;
-        color: #2d3748;
+        color: var(--accent-heading);
       }
       .project-item .title {
         margin-bottom: 6px;
@@ -153,51 +171,61 @@
         font-size: 13px;
         color: #555;
       }
-      .skills-by-domain {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
+      .skills-inline {
+        margin: 0;
         font-size: 13px;
-      }
-      .skill-row {
-        display: grid;
-        grid-template-columns: 100px 1fr;
-        gap: 4px 14px;
-        align-items: start;
-      }
-      .skill-domain {
-        color: #1a365d;
-        font-weight: 600;
-        font-size: 12px;
-        letter-spacing: 0.4px;
-        line-height: 1.5;
-      }
-      .skill-value {
         color: #333;
-        line-height: 1.55;
+        line-height: 1.62;
       }
-      .border {
-        height: 0;
-        border: none;
-        margin: 24px 0;
-        border-top: 1px solid #e2e8f0;
+      .skills-inline + .skills-inline {
+        margin-top: 4px;
+      }
+      .skills-inline .k {
+        display: inline-block;
+        min-width: 5.5em;
+        color: var(--accent-heading);
+        font-weight: 600;
+        margin-right: 4px;
       }
       @media print {
         body { max-width: none; }
-        header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-        .project-item { background: #f8fafc; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        .resume-header {
+          padding: 16px 40px 12px;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        main {
+          padding: 20px 40px 32px;
+        }
+        section, .section-block { margin-bottom: 18px; }
+        .project-item { padding-top: 10px; padding-bottom: 12px; }
+        .project-item:first-child { margin-top: 8px; padding-top: 0; }
       }
     </style>
   </head>
   
   <body id="pdf">
-    <header>
-      <div>
-        <h1>舒晨</h1>
-        <p>17602151165 · 2271728859@qq.com </p>
-        <p>10年工作经验 · 高级前端开发工程师 · 期望薪资 30-35K · 上海</p>
-      </div>
-      <img class="header-avatar" src="images/avatar.jpg" width="100" height="100" alt="头像">
+    <header class="resume-header">
+      <h1>舒晨</h1>
+      <p class="resume-intent">高级前端开发工程师</p>
+      <p class="resume-contact">
+        <span class="resume-contact-item">
+          <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.86.3 1.7.54 2.5a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.8.24 1.64.42 2.5.54A2 2 0 0 1 22 16.92z"/></svg>
+          <span>17602151165</span>
+        </span><span class="sep">|</span>
+        <span class="resume-contact-item">
+          <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>
+          <span>同手机号</span>
+        </span><span class="sep">|</span>
+        <span class="resume-contact-item">
+          <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+          <span>2271728859@qq.com</span>
+        </span><span class="sep">|</span>
+        <span class="resume-contact-item">
+          <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>上海</span>
+        </span>
+      </p>
     </header>
     <main>
       <h4>个人优势</h4>
@@ -206,30 +234,17 @@
           <ol>
             <li>深入掌握JavaScript和TypeScript，具备扎实的编程基础和丰富的实践经验。</li>
             <li>基于React/React Native主导携程火车票核心业务开发，支撑日均100万+访问量，主导性能优化使TTI提升30%。</li>
-            <li>拥有10年前端开发经验(含2年的Java后端开发经验)，积累了从0到1搭建项目的全面能力，能够在前后端协作中提供更全面的技术支持。</li>
+            <li>具备 Java 后端开发背景，积累从 0 到 1 搭建项目的经验，能在前后端协作中提供更全面的技术支持。</li>
             <li>具备团队技术带教与项目管理经验，能够带领团队高效完成项目开发。</li>
           </ol>
         </div>
       </section>
-      <div class="border"></div>
       <h4>专业技能</h4>
       <section>
-        <div class="skills-by-domain">
-          <div class="skill-row">
-            <span class="skill-domain">语言与框架</span>
-            <span class="skill-value">JavaScript · TypeScript · React · React Native · Zustand · Vue3</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-domain">工程化</span>
-            <span class="skill-value">Webpack · Node.js · Vite · Taro</span>
-          </div>
-          <div class="skill-row">
-            <span class="skill-domain">后端与数据</span>
-            <span class="skill-value">Java · MySQL</span>
-          </div>
-        </div>
+        <p class="skills-inline"><span class="k">语言</span>HTML · CSS · JavaScript · TypeScript</p>
+        <p class="skills-inline"><span class="k">框架</span>React · React Native · Vue3 · Zustand · Redux Toolkit</p>
+        <p class="skills-inline"><span class="k">工程化</span>Webpack · Vite · Node.js · XTaro / Taro</p>
       </section>
-      <div class="border"></div>
       <h4>工作经历</h4>
       <section class="section-block">
         <div class="title">
@@ -253,88 +268,6 @@
             <li>推动业务组件重构与精简，减少代码冗余，优化打包体积，团队开发效率大幅提升。</li>
           </ol>
         </div>
-        <div>
-          <h5>项目经历</h5>
-          <div class="project-item">
-            <div class="title">
-              <span class="project-name">携程火车票智能AI对话页</span>
-              <span class="time">2026.01 - 2026.03</span>
-            </div>
-            <div class="content row">
-              <p style="flex-shrink: 0;">内容：</p>
-              <ol>
-                <li>采用SSE流式响应解决AI回复逐字展示问题，监听事件驱动UI更新，统一管理连接生命周期，保障页面退出、异常时正确关闭，避免资源泄露。</li>
-                <li>使用Redux Toolkit集中管理对话列表、输入态、加载态等，解决多组件共享状态与SSE增量事件同步更新问题；Thunk处理发送、关闭、记忆保存等异步逻辑。</li>
-                <li>支持思考过程、正文、推荐卡片、智慧购票卡片等多类型内容渲染，及多轮追问、智慧卡片预订跳转等核心交互。</li>
-              </ol>
-            </div>
-          </div>
-          <div class="project-item">
-            <div class="title">
-              <span class="project-name">携程旅行APP汽车列表页重构</span>
-              <span class="time">2025.03 - 2025.07</span>
-            </div>
-            <div class="content row">
-              <p style="flex-shrink: 0;">内容：</p>
-              <ol>
-                <li>主导基于xtaro多端框架重构Flutter汽车列表页，提升需求交付效率，精简业务逻辑，降低维护成本。</li>
-                <li>采用技术：react-native、zustand、flashlist</li>
-                <li>性能优化：延迟渲染，日历、推荐卡片、多栏列表优先渲染可见部分；状态管理，使用zustand状态管理进行细粒度订阅，减少组件重复渲染；虚拟列表，使用原生flashList代替rn的flatList，支持组件复用，减少内存开销；TTI优化，通过计算屏幕可视区域比例来优化页面TTI指标，降低白屏率；体验优化，设置请求标记，优化竞态请求响应，防止页面闪烁。</li>
-              </ol>
-            </div>
-            <div class="result row">
-              <p>业绩：</p>
-              <ol>
-                <li>预加载优化，页面TTI提升40%。（500ms -&gt; 300ms）</li>
-                <li>推动BI拆分汽车、小车、火车、船、智能中转推荐等转化指标，出票量维持正向。</li>
-              </ol>
-            </div>
-          </div>
-          <div class="project-item">
-            <div class="title">
-              <span class="project-name">携程火车票保险代理多端组件库</span>
-              <span class="time">2025.10 - 2025.12</span>
-            </div>
-            <div class="content row">
-              <p style="flex-shrink: 0;">内容：</p>
-              <ol>
-                <li>背景：火车票/汽车/船票保险代理模块分散在多个业务线，存在重复开发、维护成本高、多端体验不一致等问题。</li>
-                <li>主导设计携程火车票汽船业务保险代理模块，采用 xtaro 多端组件库方案，实现数据与UI隔离、独立部署。</li>
-                <li>攻克火汽船多业务适配及APP/小程序/H5多端兼容难点，抽象统一组件接口，支持按业务配置差异化展示。</li>
-                <li>推动组件库文档、设计体验一致化落地，保障团队协作效率。</li>
-              </ol>
-            </div>
-            <div class="result row">
-              <p>业绩：</p>
-              <ol>
-                <li>实现 APP、小程序、H5 多端一套代码交付；相较各端独立开发，同类保险代理需求交付周期缩短约 50%</li>
-                <li>核心组件在火汽船等业务线复用，跨业务复用比例提升约 30%（按同类需求人天/周期与组件跨端、跨业务引用对比）</li>
-              </ol>
-            </div>
-          </div>
-          <div class="project-item">
-            <div class="title">
-              <span class="project-name">携程旅行APP火车票订单详情性能优化</span>
-              <span class="time">2024.01 - 2025.01</span>
-            </div>
-            <div class="content row">
-              <p style="flex-shrink: 0;">内容：</p>
-              <ol>
-                <li>主导火车票订单详情页性能优化，通过性能分析定位问题，采用以下技术手段显著提升加载效率：</li>
-                <li>优化数据加载流程，利用BFF（Backend for Frontend）层对接口进行聚合，减少多次请求带来的延迟，显著提升数据获取速度。</li>
-                <li>页面渲染加速，应用React批量渲染技术，优化组件渲染逻辑，缩短页面首屏加载时间。</li>
-                <li>资源加载优化，实现资源按需加载与延迟加载策略，降低大文件对首屏加载性能的影响，首屏加载时间缩短约500ms。</li>
-              </ol>
-            </div>
-            <div class="result row">
-              <p>业绩：</p>
-              <ol>
-                <li>订单详情页TTI提升30%(600ms -&gt; 400ms)，用户体验显著提升。</li>
-                <li>推动业务数据监控体系建设，实现异常快速定位与解决，保障业务稳定运行。</li>
-              </ol>
-            </div>
-          </div>
-        </div>
       </section>
       <section class="section-block">
         <div class="title">
@@ -355,38 +288,6 @@
           <ol>
             <li>沉淀联卖业务通用组件，开发效率提升，项目体验优化。</li>
           </ol>
-        </div>
-        <div>
-          <h5>项目经历</h5>
-          <div class="project-item">
-            <div class="title">
-              <span class="project-name">好房速卖小程序</span>
-              <span class="time">2019.06 - 2020.02</span>
-            </div>
-            <div class="content row">
-              <p style="flex-shrink: 0;">内容：</p>
-              <p class="pd40">主导房多多C端业主卖房平台开发，采用React+react-redux+echart，通过Taro编译为微信小程序，实现图表等核心业务。</p>
-            </div>
-            <div class="result row">
-              <p>业绩：</p>
-              <p class="pd40">主导项目整体落地，推动前后端及UI协作，完成发布维护和体验优化。</p>
-            </div>
-          </div>
-          <div class="project-item">
-            <div class="title">
-              <span class="project-name">钉钉大屏</span>
-              <span class="time">2018.06 - 2019.06</span>
-            </div>
-            <div class="content row">
-              <p style="flex-shrink: 0;">内容：</p>
-              <ol>
-                <li>主导房多多内部数据可视化大屏搭建，覆盖房源、交易、商户等核心业务数据看板。</li>
-                <li>前端：基于 ECharts 实现折线、柱状等多类型图表，支持实时数据刷新与大数据量渲染优化。</li>
-                <li>后端：使用 Node.js + Sequelize 设计数据查询与聚合接口，实现多维度数据过滤与汇总。</li>
-                <li>针对大数据量图表渲染卡顿问题，采用延迟渲染、分页加载等优化手段，提升页面加载速度与用户体验。</li>
-              </ol>
-            </div>
-          </div>
         </div>
       </section>
       <section class="section-block">
@@ -412,7 +313,82 @@
           </ol>
         </div>
       </section>
-      <div class="border"></div>
+      <h4>项目经历</h4>
+      <section>
+        <div class="project-item">
+          <div class="title">
+            <span class="project-name">携程旅行APP火车票订单详情性能优化</span>
+            <span class="time">2024.01 - 2025.01</span>
+          </div>
+          <div class="content row">
+            <p style="flex-shrink: 0;">内容：</p>
+            <ol>
+              <li>BFF 聚合接口减少串行请求；React 渲染路径优化与资源按需/延迟加载，首屏约缩短 500ms。</li>
+            </ol>
+          </div>
+          <div class="result row">
+            <p>业绩：</p>
+            <ol>
+              <li>订单详情页 TTI 提升约 30%（600ms → 400ms）。</li>
+              <li>配合监控体系快速定位异常，保障业务稳定。</li>
+            </ol>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="title">
+            <span class="project-name">携程旅行APP汽车列表页重构</span>
+            <span class="time">2025.03 - 2025.07</span>
+          </div>
+          <div class="content row">
+            <p style="flex-shrink: 0;">内容：</p>
+            <ol>
+              <li>基于 xtaro 多端框架重构汽车列表页，精简业务逻辑，提升交付与可维护性；技术栈：React Native、Zustand、FlashList。</li>
+              <li>延迟渲染可见区、Zustand 细粒度订阅、FlashList 虚拟列表与 TTI/竞态优化，降低白屏与闪烁。</li>
+            </ol>
+          </div>
+          <div class="result row">
+            <p>业绩：</p>
+            <ol>
+              <li>预加载与渲染优化，页面 TTI 提升约 40%（500ms → 300ms）。</li>
+              <li>推动 BI 拆分多交通品类转化指标，出票量维持正向。</li>
+            </ol>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="title">
+            <span class="project-name">携程火车票保险代理多端组件库</span>
+            <span class="time">2025.10 - 2025.12</span>
+          </div>
+          <div class="content row">
+            <p style="flex-shrink: 0;">内容：</p>
+            <ol>
+              <li>针对火/汽/船保险代理分散、重复开发与体验不一致，主导 xtaro 多端方案，数据与 UI 隔离、可独立部署。</li>
+              <li>统一组件接口与业务配置化展示，覆盖 APP / 小程序 / H5，完善文档与协作规范。</li>
+            </ol>
+          </div>
+          <div class="result row">
+            <p>业绩：</p>
+            <ol>
+              <li>多端一套代码交付，同类需求交付周期较分端开发缩短约 50%。</li>
+              <li>核心组件跨业务复用比例提升约 30%。</li>
+            </ol>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="title">
+            <span class="project-name">携程火车票智能AI对话页</span>
+            <span class="time">2026.01 - 2026.03</span>
+          </div>
+          <div class="content row">
+            <p style="flex-shrink: 0;">内容：</p>
+            <ol>
+              <li>采用 SSE 流式响应与事件驱动 UI，统一管理连接生命周期，避免退出与异常时资源泄露。</li>
+              <li>Redux Toolkit 管理对话与加载态，与 SSE 增量更新同步；Thunk 承载发送、关闭、记忆保存等异步流程。</li>
+              <li>支持思考过程、推荐/智慧购票卡片与多轮追问、预订跳转等核心交互。</li>
+            </ol>
+          </div>
+        </div>
+      </section>
       <h4>教育经历</h4>
       <section>
         <div class="title">
@@ -421,7 +397,6 @@
           <span class="time">2011-2015</span>
         </div>
       </section>
-      <div class="border"></div>
       <h4>资格证书</h4>
       <section>
         <div class="cert-section">
