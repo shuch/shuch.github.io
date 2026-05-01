@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" class="lang-zh">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>舒晨-高级前端开发工程师</title>
     <style>
       :root {
@@ -21,8 +22,54 @@
         padding: 0;
         background: #fff;
       }
+      html.lang-en body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+      html.lang-en [data-lang="zh"],
+      html.lang-zh [data-lang="en"] {
+        display: none !important;
+      }
+      .lang-switch {
+        position: fixed;
+        top: 12px;
+        right: max(12px, calc((100vw - 800px) / 2 + 8px));
+        z-index: 100;
+        display: flex;
+        align-items: stretch;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid var(--project-sep);
+        border-radius: 8px;
+        padding: 3px;
+        font-size: 12px;
+        box-shadow: 0 2px 12px rgba(15, 107, 184, 0.08);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+      }
+      .lang-switch button {
+        border: none;
+        background: transparent;
+        padding: 6px 14px;
+        cursor: pointer;
+        border-radius: 6px;
+        color: #555;
+        font-family: inherit;
+        font-size: 12px;
+        line-height: 1.3;
+      }
+      .lang-switch button:hover {
+        color: var(--accent-heading);
+      }
+      .lang-switch button[aria-pressed="true"] {
+        background: var(--accent);
+        color: #fff;
+      }
+      .lang-switch button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
       .resume-header {
         padding: 20px 40px 16px;
+        padding-top: 48px;
       }
       .resume-header h1 {
         margin: 0 0 10px 0;
@@ -76,6 +123,9 @@
         border-bottom: 1.5px solid var(--accent);
         padding-bottom: 6px;
       }
+      html.lang-en h4 {
+        letter-spacing: 0.8px;
+      }
       section {
         margin-bottom: 24px;
       }
@@ -116,7 +166,11 @@
         margin: 0;
         font-size: 13px;
         color: #666;
-        min-width: 42px;
+        min-width: 3.5em;
+      }
+      html.lang-en .content.row > p:first-child,
+      html.lang-en .result.row > p:first-child {
+        min-width: 7.5em;
       }
       .content.row ol, .result.row ol {
         margin: 0;
@@ -187,10 +241,15 @@
         font-weight: 600;
         margin-right: 4px;
       }
+      html.lang-en .skills-inline .k {
+        min-width: 6.5em;
+      }
       @media print {
         body { max-width: none; }
+        .lang-switch { display: none !important; }
         .resume-header {
           padding: 16px 40px 12px;
+          padding-top: 16px;
           -webkit-print-color-adjust: exact;
           print-color-adjust: exact;
         }
@@ -203,11 +262,15 @@
       }
     </style>
   </head>
-  
+
   <body id="pdf">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" id="lang-zh" aria-pressed="true">中文</button>
+      <button type="button" id="lang-en" aria-pressed="false">EN</button>
+    </div>
     <header class="resume-header">
-      <h1>舒晨</h1>
-      <p class="resume-intent">高级前端开发工程师</p>
+      <h1><span data-lang="zh">舒晨</span><span data-lang="en">Steve Shu</span></h1>
+      <p class="resume-intent"><span data-lang="zh">高级前端开发工程师</span><span data-lang="en">Senior Front-End Developer</span></p>
       <p class="resume-contact">
         <span class="resume-contact-item">
           <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.86.3 1.7.54 2.5a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.8.24 1.64.42 2.5.54A2 2 0 0 1 22 16.92z"/></svg>
@@ -215,212 +278,235 @@
         </span><span class="sep">|</span>
         <span class="resume-contact-item">
           <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>
-          <span>同手机号</span>
+          <span data-lang="zh">同手机号</span><span data-lang="en">WeChat (same number)</span>
         </span><span class="sep">|</span>
         <span class="resume-contact-item">
           <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
-          <span>2271728859@qq.com</span>
+          <span data-lang="zh">2271728859@qq.com</span><span data-lang="en">shuchery@gmail.com</span>
         </span><span class="sep">|</span>
         <span class="resume-contact-item">
           <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          <span>上海</span>
+          <span data-lang="zh">上海</span><span data-lang="en">Shanghai, China</span>
         </span>
       </p>
     </header>
     <main>
-      <h4>个人优势</h4>
+      <h4><span data-lang="zh">个人优势</span><span data-lang="en">Summary</span></h4>
       <section>
         <div class="content row">
           <ol>
-            <li>深入掌握JavaScript和TypeScript，具备扎实的编程基础和丰富的实践经验。</li>
-            <li>基于React/React Native主导携程火车票核心业务开发，支撑日均100万+访问量，主导性能优化使TTI提升30%。</li>
-            <li>具备 Java 后端开发背景，积累从 0 到 1 搭建项目的经验，能在前后端协作中提供更全面的技术支持。</li>
-            <li>具备团队技术带教与项目管理经验，能够带领团队高效完成项目开发。</li>
+            <li><span data-lang="zh">深入掌握JavaScript和TypeScript，具备扎实的编程基础和丰富的实践经验。</span><span data-lang="en">Strong JavaScript and TypeScript with solid fundamentals and extensive hands-on experience.</span></li>
+            <li><span data-lang="zh">基于React/React Native主导携程火车票核心业务开发，支撑日均100万+访问量，主导性能优化使TTI提升30%。</span><span data-lang="en">Led core train-ticket features for Trip.com on React / React Native (1M+ DAU); drove performance work that improved TTI by ~30%.</span></li>
+            <li><span data-lang="zh">具备 Java 后端开发背景，积累从 0 到 1 搭建项目的经验，能在前后端协作中提供更全面的技术支持。</span><span data-lang="en">Java backend background and experience building products from scratch; strong collaboration across the stack.</span></li>
+            <li><span data-lang="zh">具备团队技术带教与项目管理经验，能够带领团队高效完成项目开发。</span><span data-lang="en">Experience in technical mentoring and project management; able to lead teams to deliver efficiently.</span></li>
           </ol>
         </div>
       </section>
-      <h4>专业技能</h4>
+      <h4><span data-lang="zh">专业技能</span><span data-lang="en">Skills</span></h4>
       <section>
-        <p class="skills-inline"><span class="k">语言</span>HTML · CSS · JavaScript · TypeScript</p>
-        <p class="skills-inline"><span class="k">框架</span>React · React Native · Vue3 · Zustand · Redux Toolkit</p>
-        <p class="skills-inline"><span class="k">工程化</span>Webpack · Vite · Node.js · XTaro / Taro</p>
+        <p class="skills-inline"><span class="k"><span data-lang="zh">语言</span><span data-lang="en">Languages</span></span>HTML · CSS · JavaScript · TypeScript · Python</p>
+        <p class="skills-inline"><span class="k"><span data-lang="zh">框架</span><span data-lang="en">Frameworks</span></span>React · React Native · Vue3 · Zustand · Redux Toolkit · FastAPI</p>
+        <p class="skills-inline"><span class="k"><span data-lang="zh">工程化</span><span data-lang="en">Tooling</span></span>Webpack · Vite · Node.js · XTaro / Taro</p>
       </section>
-      <h4>工作经历</h4>
+      <h4><span data-lang="zh">工作经历</span><span data-lang="en">Work Experience</span></h4>
       <section class="section-block">
         <div class="title">
-          <span class="company">携程旅游网络技术（上海）有限公司</span>
-          <span class="role">高级前端开发工程师</span>
-          <span class="time">2020.08 - 至今</span>
+          <span class="company"><span data-lang="zh">携程旅游网络技术（上海）有限公司</span><span data-lang="en">Trip.com (Shanghai)</span></span>
+          <span class="role"><span data-lang="zh">高级前端开发工程师</span><span data-lang="en">Senior Front-End Developer</span></span>
+          <span class="time"><span data-lang="zh">2020.08 - 至今</span><span data-lang="en">Aug 2020 – Present</span></span>
         </div>
         <div class="content row">
-          <p>内容：</p>
+          <p><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
           <ol>
-            <li>主导携程旅行APP火车票核心功能设计与实现，日均访问量100万+，保障用户流畅预订体验。</li>
-            <li>独立完成火车票增长H5页开发及Node.js服务接口设计、部署，项目稳定性显著提升。</li>
-            <li>推动搭建业务数据监控体系，实现异常快速定位与解决，保障业务稳定运行。</li>
-            <li>设计并落地跨端React Native组件库，统一开发规范，团队组件复用率提升。</li>
+            <li><span data-lang="zh">主导携程旅行APP火车票核心功能设计与实现，日均访问量100万+，保障用户流畅预订体验。</span><span data-lang="en">Led design and delivery of core train-ticket features in the Trip.com app (1M+ DAU), ensuring a smooth booking experience.</span></li>
+            <li><span data-lang="zh">独立完成火车票增长H5页开发及Node.js服务接口设计、部署，项目稳定性显著提升。</span><span data-lang="en">Built growth H5 pages and designed/deployed Node.js APIs; significantly improved stability.</span></li>
+            <li><span data-lang="zh">推动搭建业务数据监控体系，实现异常快速定位与解决，保障业务稳定运行。</span><span data-lang="en">Established business monitoring for faster incident detection and resolution.</span></li>
+            <li><span data-lang="zh">设计并落地跨端React Native组件库，统一开发规范，团队组件复用率提升。</span><span data-lang="en">Designed and shipped a cross-platform React Native component library; improved reuse and consistency.</span></li>
           </ol>
         </div>
         <div class="result row">
-          <p>业绩：</p>
+          <p><span data-lang="zh">业绩：</span><span data-lang="en">Highlights:</span></p>
           <ol>
-            <li>主导公司React Native技术培训，推动跨平台框架落地，业务迭代效率提升。</li>
-            <li>推动业务组件重构与精简，减少代码冗余，优化打包体积，团队开发效率大幅提升。</li>
-          </ol>
-        </div>
-      </section>
-      <section class="section-block">
-        <div class="title">
-          <span class="company">深圳市房多多网络科技有限公司</span>
-          <span class="role">前端开发工程师</span>
-          <span class="time">2017.08 - 2020.05</span>
-        </div>
-        <div class="content row">
-          <p>内容：</p>
-          <ol>
-            <li>主导房多多小程序从0到1搭建，上线后日均访问量达72万；主导好房速卖、联卖项目前端研发。</li>
-            <li>主导前端项目规划与落地，推动前后端及UI协作，保障需求高效交付。</li>
-            <li>担任项目组 scrum master，组织团队稳定迭代，把控开发节奏。</li>
-          </ol>
-        </div>
-        <div class="result row">
-          <p>业绩：</p>
-          <ol>
-            <li>沉淀联卖业务通用组件，开发效率提升，项目体验优化。</li>
+            <li><span data-lang="zh">主导公司React Native技术培训，推动跨平台框架落地，业务迭代效率提升。</span><span data-lang="en">Led internal React Native training and adoption of cross-platform practices; faster iteration.</span></li>
+            <li><span data-lang="zh">推动业务组件重构与精简，减少代码冗余，优化打包体积，团队开发效率大幅提升。</span><span data-lang="en">Refactored and simplified business components; reduced bundle size and improved team productivity.</span></li>
           </ol>
         </div>
       </section>
       <section class="section-block">
         <div class="title">
-          <span class="company">上海赐云网络科技有限公司</span>
-          <span class="role">前端工程师</span>
-          <span class="time">2015.06 - 2017.07</span>
+          <span class="company"><span data-lang="zh">深圳市房多多网络科技有限公司</span><span data-lang="en">FangDD Network Technology (Shenzhen)</span></span>
+          <span class="role"><span data-lang="zh">前端开发工程师</span><span data-lang="en">Front-End Developer</span></span>
+          <span class="time"><span data-lang="zh">2017.08 - 2020.05</span><span data-lang="en">Aug 2017 – May 2020</span></span>
         </div>
         <div class="content row">
-          <p>内容：</p>
+          <p><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
           <ol>
-            <li>独立完成官网及H5页面前端开发，实现产品视觉与交互，保障浏览器兼容性。</li>
-            <li>负责前后端数据对接与效果展示，推动接口联调落地。</li>
-            <li>主导前端技术选型，推动Web前沿技术探索与实践。</li>
-            <li>收集用户反馈，持续优化网站性能和用户体验。</li>
+            <li><span data-lang="zh">主导房多多小程序从0到1搭建，上线后日均访问量达72万；主导好房速卖、联卖项目前端研发。</span><span data-lang="en">Built the FangDD mini program from scratch (720K+ DAU); led front-end for Haofang Sumai and joint-sale products.</span></li>
+            <li><span data-lang="zh">主导前端项目规划与落地，推动前后端及UI协作，保障需求高效交付。</span><span data-lang="en">Owned front-end planning and execution; coordinated with backend and design for on-time delivery.</span></li>
+            <li><span data-lang="zh">担任项目组 scrum master，组织团队稳定迭代，把控开发节奏。</span><span data-lang="en">Served as Scrum Master; facilitated steady iterations and predictable delivery.</span></li>
           </ol>
         </div>
         <div class="result row">
-          <p>业绩：</p>
+          <p><span data-lang="zh">业绩：</span><span data-lang="en">Highlights:</span></p>
           <ol>
-            <li>带领技术团队制定工作计划、分配任务，减少沟通成本。</li>
-            <li>设计通用UI组件库，提升开发效率，节约开发时间。</li>
+            <li><span data-lang="zh">沉淀联卖业务通用组件，开发效率提升，项目体验优化。</span><span data-lang="en">Built reusable components for joint-sale flows; improved dev speed and UX.</span></li>
           </ol>
         </div>
       </section>
-      <h4>项目经历</h4>
+      <section class="section-block">
+        <div class="title">
+          <span class="company"><span data-lang="zh">上海赐云网络科技有限公司</span><span data-lang="en">Ciyun Network Technology (Shanghai)</span></span>
+          <span class="role"><span data-lang="zh">前端工程师</span><span data-lang="en">Front-End Engineer</span></span>
+          <span class="time"><span data-lang="zh">2015.06 - 2017.07</span><span data-lang="en">Jun 2015 – Jul 2017</span></span>
+        </div>
+        <div class="content row">
+          <p><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
+          <ol>
+            <li><span data-lang="zh">独立完成官网及H5页面前端开发，实现产品视觉与交互，保障浏览器兼容性。</span><span data-lang="en">Delivered corporate site and H5 pages; implemented visual design and interactions with solid browser support.</span></li>
+            <li><span data-lang="zh">负责前后端数据对接与效果展示，推动接口联调落地。</span><span data-lang="en">Owned API integration and end-to-end behavior with backend colleagues.</span></li>
+            <li><span data-lang="zh">主导前端技术选型，推动Web前沿技术探索与实践。</span><span data-lang="en">Led technology choices and explorations with modern web practices.</span></li>
+            <li><span data-lang="zh">收集用户反馈，持续优化网站性能和用户体验。</span><span data-lang="en">Collected user feedback and iterated on performance and UX.</span></li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p><span data-lang="zh">业绩：</span><span data-lang="en">Highlights:</span></p>
+          <ol>
+            <li><span data-lang="zh">带领技术团队制定工作计划、分配任务，减少沟通成本。</span><span data-lang="en">Led the team on planning and task breakdown; reduced coordination overhead.</span></li>
+            <li><span data-lang="zh">设计通用UI组件库，提升开发效率，节约开发时间。</span><span data-lang="en">Designed a shared UI kit to speed up delivery.</span></li>
+          </ol>
+        </div>
+      </section>
+      <h4><span data-lang="zh">项目经历</span><span data-lang="en">Projects</span></h4>
       <section>
         <div class="project-item">
           <div class="title">
-            <span class="project-name">携程旅行APP火车票订单详情性能优化</span>
-            <span class="time">2024.01 - 2025.01</span>
+            <span class="project-name"><span data-lang="zh">携程旅行APP火车票订单详情性能优化</span><span data-lang="en">Trip.com App — Train Order Detail Performance</span></span>
+            <span class="time"><span data-lang="zh">2024.01 - 2025.01</span><span data-lang="en">Jan 2024 – Jan 2025</span></span>
           </div>
           <div class="content row">
-            <p style="flex-shrink: 0;">内容：</p>
+            <p style="flex-shrink: 0;"><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
             <ol>
-              <li>BFF 聚合接口减少串行请求；React 渲染路径优化与资源按需/延迟加载，首屏约缩短 500ms。</li>
+              <li><span data-lang="zh">BFF 聚合接口减少串行请求；React 渲染路径优化与资源按需/延迟加载，首屏约缩短 500ms。</span><span data-lang="en">BFF aggregation to cut serial requests; optimized React render path and on-demand/deferred loading; ~500ms faster first paint.</span></li>
             </ol>
           </div>
           <div class="result row">
-            <p>业绩：</p>
+            <p><span data-lang="zh">业绩：</span><span data-lang="en">Results:</span></p>
             <ol>
-              <li>订单详情页 TTI 提升约 30%（600ms → 400ms）。</li>
-              <li>配合监控体系快速定位异常，保障业务稳定。</li>
+              <li><span data-lang="zh">订单详情页 TTI 提升约 30%（600ms → 400ms）。</span><span data-lang="en">TTI improved ~30% on order detail (600ms → 400ms).</span></li>
+              <li><span data-lang="zh">配合监控体系快速定位异常，保障业务稳定。</span><span data-lang="en">Monitoring enabled faster root-cause analysis and stable operations.</span></li>
             </ol>
           </div>
         </div>
         <div class="project-item">
           <div class="title">
-            <span class="project-name">携程旅行APP汽车列表页重构</span>
-            <span class="time">2025.03 - 2025.07</span>
+            <span class="project-name"><span data-lang="zh">携程旅行APP汽车列表页重构</span><span data-lang="en">Trip.com App — Bus Listing Page Rewrite</span></span>
+            <span class="time"><span data-lang="zh">2025.03 - 2025.07</span><span data-lang="en">Mar 2025 – Jul 2025</span></span>
           </div>
           <div class="content row">
-            <p style="flex-shrink: 0;">内容：</p>
+            <p style="flex-shrink: 0;"><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
             <ol>
-              <li>基于 xtaro 多端框架重构汽车列表页，精简业务逻辑，提升交付与可维护性；技术栈：React Native、Zustand、FlashList。</li>
-              <li>延迟渲染可见区、Zustand 细粒度订阅、FlashList 虚拟列表与 TTI/竞态优化，降低白屏与闪烁。</li>
+              <li><span data-lang="zh">基于 xtaro 多端框架重构汽车列表页，精简业务逻辑，提升交付与可维护性；技术栈：React Native、Zustand、FlashList。</span><span data-lang="en">Rebuilt the bus listing page with XTaro; simplified logic for maintainability. Stack: React Native, Zustand, FlashList.</span></li>
+              <li><span data-lang="zh">延迟渲染可见区、Zustand 细粒度订阅、FlashList 虚拟列表与 TTI/竞态优化，降低白屏与闪烁。</span><span data-lang="en">Deferred rendering for visible areas, fine-grained Zustand subscriptions, FlashList virtualization, TTI and race-condition fixes; less blank screen and flicker.</span></li>
             </ol>
           </div>
           <div class="result row">
-            <p>业绩：</p>
+            <p><span data-lang="zh">业绩：</span><span data-lang="en">Results:</span></p>
             <ol>
-              <li>预加载与渲染优化，页面 TTI 提升约 40%（500ms → 300ms）。</li>
-              <li>推动 BI 拆分多交通品类转化指标，出票量维持正向。</li>
+              <li><span data-lang="zh">预加载与渲染优化，页面 TTI 提升约 40%（500ms → 300ms）。</span><span data-lang="en">Preload and render tuning; TTI ~40% better (500ms → 300ms).</span></li>
+              <li><span data-lang="zh">推动 BI 拆分多交通品类转化指标，出票量维持正向。</span><span data-lang="en">Worked with BI on multi-modal conversion metrics; ticket volume stayed positive.</span></li>
             </ol>
           </div>
         </div>
         <div class="project-item">
           <div class="title">
-            <span class="project-name">携程火车票保险代理多端组件库</span>
-            <span class="time">2025.10 - 2025.12</span>
+            <span class="project-name"><span data-lang="zh">携程火车票保险代理多端组件库</span><span data-lang="en">Train Insurance Agency — Cross-Platform Component Library</span></span>
+            <span class="time"><span data-lang="zh">2025.10 - 2025.12</span><span data-lang="en">Oct 2025 – Dec 2025</span></span>
           </div>
           <div class="content row">
-            <p style="flex-shrink: 0;">内容：</p>
+            <p style="flex-shrink: 0;"><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
             <ol>
-              <li>针对火/汽/船保险代理分散、重复开发与体验不一致，主导 xtaro 多端方案，数据与 UI 隔离、可独立部署。</li>
-              <li>统一组件接口与业务配置化展示，覆盖 APP / 小程序 / H5，完善文档与协作规范。</li>
+              <li><span data-lang="zh">针对火/汽/船保险代理分散、重复开发与体验不一致，主导 xtaro 多端方案，数据与 UI 隔离、可独立部署。</span><span data-lang="en">Addressed fragmented train/bus/ship insurance flows with an XTaro solution; separated data and UI with independent deployability.</span></li>
+              <li><span data-lang="zh">统一组件接口与业务配置化展示，覆盖 APP / 小程序 / H5，完善文档与协作规范。</span><span data-lang="en">Unified APIs and configurable business UI across app, mini program, and H5; documentation and collaboration guidelines.</span></li>
             </ol>
           </div>
           <div class="result row">
-            <p>业绩：</p>
+            <p><span data-lang="zh">业绩：</span><span data-lang="en">Results:</span></p>
             <ol>
-              <li>多端一套代码交付，同类需求交付周期较分端开发缩短约 50%。</li>
-              <li>核心组件跨业务复用比例提升约 30%。</li>
-            </ol>
-          </div>
-        </div>
-        <div class="project-item">
-          <div class="title">
-            <span class="project-name">携程火车票智能AI对话页</span>
-            <span class="time">2026.01 - 2026.03</span>
-          </div>
-          <div class="content row">
-            <p style="flex-shrink: 0;">内容：</p>
-            <ol>
-              <li>采用 SSE 流式响应与事件驱动 UI，统一管理连接生命周期，避免退出与异常时资源泄露。</li>
-              <li>Redux Toolkit 管理对话与加载态，与 SSE 增量更新同步；Thunk 承载发送、关闭、记忆保存等异步流程。</li>
-              <li>支持思考过程、推荐/智慧购票卡片与多轮追问、预订跳转等核心交互。</li>
+              <li><span data-lang="zh">多端一套代码交付，同类需求交付周期较分端开发缩短约 50%。</span><span data-lang="en">One codebase for all platforms; ~50% shorter delivery vs. separate per-platform work.</span></li>
+              <li><span data-lang="zh">核心组件跨业务复用比例提升约 30%。</span><span data-lang="en">~30% higher reuse of core components across business lines.</span></li>
             </ol>
           </div>
         </div>
       </section>
-      <h4>教育经历</h4>
+      <h4><span data-lang="zh">教育经历</span><span data-lang="en">Education</span></h4>
       <section>
         <div class="title">
-          <span>湖北理工学院</span>
-          <span>本科 信息与计算科学</span>
+          <span><span data-lang="zh">湖北理工学院</span><span data-lang="en">Hubei Polytechnic University</span></span>
+          <span><span data-lang="zh">本科 信息与计算科学</span><span data-lang="en">B.Sc. — Information &amp; Computational Science</span></span>
           <span class="time">2011-2015</span>
         </div>
       </section>
-      <h4>资格证书</h4>
+      <h4><span data-lang="zh">资格证书</span><span data-lang="en">Certifications</span></h4>
       <section>
         <div class="cert-section">
-          <span class="cert">计算机三级</span>
-          <span class="cert">大学英语六级</span>
-          <span class="cert">全国计算机技术与软件专业技术资格（程序员）</span>
+          <span class="cert"><span data-lang="zh">大学英语六级</span><span data-lang="en">CET-6</span></span>
+          <span class="cert"><span data-lang="zh">全国计算机技术与软件专业技术资格（程序员）</span><span data-lang="en">Software Designer (Programmer) — National Qualification</span></span>
         </div>
       </section>
     </main>
+    <!--
+    <section class="mt20">
+      <div class="title">
+        <span class="company">学生赚APP</span>
+        <span>软件工程师</span>
+        <span class="time">2015/06 - 2016/06</span>
+      </div>
+      <div class="content row">
+        <p style="flex-shrink: 0;">内容：</p>
+        <ol>
+          <li>使用 Spring 开发后端数据接口，提供APP客户端使用。</li>
+          <li>使用 Java Servlet 开发后台数据管理界面，配置管理人员操作权限。</li>
+          <li>使用 Mysql 存储客户端数据，Mybatis 封装定制化SQL操作数据层。</li>
+        </ol>
+      </div>
+    </section>
+    -->
+    <script>
+(function () {
+  var STORAGE_KEY = 'resumeLang';
+  var titles = { zh: '舒晨-高级前端开发工程师', en: '舒晨_Steve_Senior Front-End Developer' };
+
+  function applyLang(lang) {
+    var isEn = lang === 'en';
+    document.documentElement.classList.toggle('lang-en', isEn);
+    document.documentElement.classList.toggle('lang-zh', !isEn);
+    document.documentElement.lang = isEn ? 'en' : 'zh-CN';
+    document.title = titles[isEn ? 'en' : 'zh'];
+    try {
+      localStorage.setItem(STORAGE_KEY, lang);
+    } catch (e) {}
+    var zhBtn = document.getElementById('lang-zh');
+    var enBtn = document.getElementById('lang-en');
+    if (zhBtn && enBtn) {
+      zhBtn.setAttribute('aria-pressed', isEn ? 'false' : 'true');
+      enBtn.setAttribute('aria-pressed', isEn ? 'true' : 'false');
+    }
+  }
+
+  var saved = null;
+  try {
+    saved = localStorage.getItem(STORAGE_KEY);
+  } catch (e) {}
+
+  applyLang(saved === 'en' || saved === 'zh' ? saved : 'zh');
+
+  document.getElementById('lang-zh').addEventListener('click', function () {
+    applyLang('zh');
+  });
+  document.getElementById('lang-en').addEventListener('click', function () {
+    applyLang('en');
+  });
+})();
+    </script>
   </body>
 </html>
-
-<!-- <section class="mt20">
-  <div class="title">
-    <span class="company">学生赚APP</span>
-    <span>软件工程师</span>
-    <span class="time">2015/06 - 2016/06</span>
-  </div>
-  <div class="content row">
-    <p style="flex-shrink: 0;">内容：</p>
-    <ol>
-      <li>使用 Spring 开发后端数据接口，提供APP客户端使用。</li>
-      <li>使用 Java Servlet 开发后台数据管理界面，配置管理人员操作权限。</li>
-      <li>使用 Mysql 存储客户端数据，Mybatis 封装定制化SQL操作数据层。</li>
-    </ol>
-  </div>
-</section> -->
