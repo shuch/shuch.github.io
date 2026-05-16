@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>舒晨 — 高级前端开发工程师</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-soft: #3d3d5c;
+    --ink-mute: #7a7a9a;
+    --accent: #2563c7;
+    --accent-light: #dbeafe;
+    --line: #e2e4ee;
+    --bg: #fafafa;
+    --paper: #ffffff;
+    --tag-bg: #f0f3ff;
+    --tag-text: #3b4abf;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 13.5px;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 40px auto;
+    background: var(--paper);
+    box-shadow: 0 4px 40px rgba(0,0,0,.08);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    padding: 44px 52px 36px;
+    border-bottom: 2.5px solid var(--ink);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+  }
+
+  .name {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 36px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    color: var(--ink);
+    line-height: 1.1;
+    margin-bottom: 10px;
+  }
+
+  .title-badge {
+    display: inline-block;
+    font-size: 12.5px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    border-radius: 2px;
+    padding: 3px 10px;
+    margin-bottom: 16px;
+  }
+
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .contact-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .contact-icon {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    color: var(--accent);
+  }
+
+  .highlight-bar {
+    text-align: right;
+    font-size: 12px;
+    color: var(--ink-mute);
+    line-height: 2;
+  }
+
+  .highlight-bar strong {
+    display: block;
+    font-size: 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: -.02em;
+  }
+
+  /* ── BODY LAYOUT ── */
+  .body {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+  }
+
+  /* ── SIDEBAR ── */
+  .sidebar {
+    padding: 36px 24px 36px 32px;
+    border-right: 1px solid var(--line);
+    background: #f7f8fc;
+  }
+
+  .sidebar-section {
+    margin-bottom: 32px;
+  }
+
+  .sidebar-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .skill-group {
+    margin-bottom: 14px;
+  }
+
+  .skill-group-name {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    border-radius: 2px;
+    padding: 2px 7px;
+    white-space: nowrap;
+  }
+
+  .tag.star {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .edu-block {
+    margin-bottom: 10px;
+  }
+
+  .edu-school {
+    font-weight: 500;
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+
+  .edu-detail {
+    font-size: 11.5px;
+    color: var(--ink-mute);
+    margin-top: 2px;
+  }
+
+  .cert-item {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+    padding-left: 10px;
+    position: relative;
+  }
+  .cert-item::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 10px;
+    top: 1px;
+  }
+
+  /* ── MAIN ── */
+  .main {
+    padding: 36px 44px;
+  }
+
+  .section {
+    margin-bottom: 36px;
+  }
+
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1.5px;
+    background: var(--ink);
+    opacity: .12;
+  }
+
+  /* Advantages */
+  .adv-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .adv-list li {
+    font-size: 13px;
+    color: var(--ink-soft);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .adv-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .adv-list li strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  /* Work experience */
+  .exp-item {
+    margin-bottom: 26px;
+    padding-bottom: 26px;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .exp-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 3px;
+  }
+
+  .exp-company {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--ink);
+  }
+
+  .exp-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+  }
+
+  .exp-role {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .bullet-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .bullet-list li {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .bullet-list li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--ink-mute);
+  }
+
+  .perf-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+  }
+
+  .perf-chip {
+    font-size: 11.5px;
+    font-family: 'JetBrains Mono', monospace;
+    background: #eff6ff;
+    color: var(--accent);
+    border: 1px solid #bfdbfe;
+    border-radius: 2px;
+    padding: 2px 9px;
+  }
+
+  /* Projects */
+  .project-item {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px dashed var(--line);
+    position: relative;
+  }
+
+  .project-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 2px;
+  }
+
+  .project-name {
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink);
+  }
+
+  .project-badge {
+    font-size: 10.5px;
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--tag-bg);
+    color: var(--tag-text);
+    padding: 2px 8px;
+    border-radius: 2px;
+  }
+
+  .project-badge.featured {
+    background: #fef3c7;
+    color: #92400e;
+  }
+
+  .project-period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-mute);
+    margin-bottom: 8px;
+  }
+
+  .stack-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 9px;
+  }
+
+  .stack-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    background: var(--line);
+    color: var(--ink-soft);
+    border-radius: 2px;
+    padding: 1px 7px;
+  }
+
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; margin: 0; border-radius: 0; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="header" style="grid-template-columns:1fr">
+    <div>
+      <div class="name">舒 晨</div>
+      <div class="title-badge">Senior Frontend Engineer</div>
+      <div class="contact">
+        <span class="contact-item">
+          <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.86.3 1.7.54 2.5a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.8.24 1.64.42 2.5.54A2 2 0 0 1 22 16.92z"/></svg>
+          <span>17602151165</span>
+        </span>
+        <span class="contact-item">
+          <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+          <span>2271728859@qq.com</span>
+        </span>
+        <span class="contact-item">
+          <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>上海</span>
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <div class="body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">专业技能</div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">语言</div>
+          <div class="tags">
+            <span class="tag star">HTML5</span>
+            <span class="tag">CSS3</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">TypeScript</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">框架</div>
+          <div class="tags">
+            <span class="tag star">React</span>
+            <span class="tag">React Native</span>
+            <span class="tag">Vue3</span>
+            <span class="tag">Zustand</span>
+            <span class="tag">Redux Toolkit</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">工程化</div>
+          <div class="tags">
+            <span class="tag star">Webpack</span>
+            <span class="tag">Vite</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Taro / XTaro</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">可视化</div>
+          <div class="tags">
+            <span class="tag star">ECharts</span>
+            <span class="tag">AntV</span>
+            <span class="tag">Canvas</span>
+            <span class="tag">OpenLayers</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-name">性能与工具</div>
+          <div class="tags">
+            <span class="tag star">Chrome DevTools</span>
+            <span class="tag">Lighthouse</span>
+            <span class="tag">React Profiler</span>
+            <span class="tag">Bundle Analyzer</span>
+            <span class="tag">Git</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">教育经历</div>
+        <div class="edu-block">
+          <div class="edu-school">湖北理工学院</div>
+          <div class="edu-detail">本科 · 信息与计算科学</div>
+          <div class="edu-detail">2011 — 2015</div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">资格证书</div>
+        <div class="cert-item">大学英语六级</div>
+        <div class="cert-item">全国计算机软件资格证书（程序员）</div>
+      </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- 个人优势 -->
+      <section class="section">
+        <div class="section-title">个人优势</div>
+        <ul class="adv-list">
+          <li><strong>深厚 JS/TS 基础：</strong>深入掌握 JavaScript 和 TypeScript，具备扎实的工程基础与丰富实践经验，熟悉 ES6+ 语法及前端模块化开发。</li>
+          <li><strong>性能优化专项：</strong>基于 React / React Native 主导携程火车票核心业务开发，支撑日均 100 万+ 访问量；深入掌握浏览器渲染机制，系统性能优化使 TTI 提升 30%～40%。</li>
+          <li><strong>BFF 与全栈协作：</strong>具备 Java 后端开发背景，独立完成 Node.js BFF 层设计与部署，能在前后端协作中提供更全面的技术支持。</li>
+          <li><strong>团队带教与规范建设：</strong>主导跨端组件库设计与 React Native 技术培训，具备团队技术带教与项目管理经验。</li>
+        </ul>
+      </section>
+
+      <!-- 工作经历 -->
+      <section class="section">
+        <div class="section-title">工作经历</div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">携程旅游网络技术（上海）有限公司</span>
+            <span class="exp-period">2020.08 — 至今</span>
+          </div>
+          <div class="exp-role">高级前端开发工程师</div>
+          <ul class="bullet-list">
+            <li>主导携程旅行 APP 火车票核心功能设计与实现，日均访问量 100 万+，保障用户流畅预订体验。</li>
+            <li>独立完成火车票增长 H5 页开发及 Node.js BFF 接口设计与部署，项目稳定性显著提升。</li>
+            <li>推动搭建业务数据监控体系，实现异常快速定位与解决，保障业务稳定运行。</li>
+            <li>设计并落地跨端 React Native 组件库，统一开发规范，团队组件复用率显著提升。</li>
+            <li>主导 React Native 技术培训与跨平台落地，推动业务组件重构提效，打包体积持续收窄。</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">深圳市房多多网络科技有限公司</span>
+            <span class="exp-period">2017.08 — 2020.05</span>
+          </div>
+          <div class="exp-role">前端开发工程师</div>
+          <ul class="bullet-list">
+            <li>主导房多多小程序从 0 到 1 搭建，上线后日均访问量达 72 万；主导好房速卖、联卖项目前端研发，沉淀通用组件，提升交付效率与项目体验。</li>
+            <li>主导前端项目规划与落地，推动前后端及 UI 协作，保障需求高效交付。</li>
+            <li>担任项目组 Scrum Master，组织团队稳定迭代，把控开发节奏。</li>
+          </ul>
+        </div>
+
+        <div class="exp-item">
+          <div class="exp-header">
+            <span class="exp-company">上海赐云网络科技有限公司</span>
+            <span class="exp-period">2015.06 — 2017.07</span>
+          </div>
+          <div class="exp-role">前端工程师</div>
+          <ul class="bullet-list">
+            <li>独立完成官网及 H5 页面前端开发，负责前后端数据对接与联调，保障产品视觉交互与浏览器兼容性。</li>
+            <li>主导前端技术选型，推动 Web 前沿技术探索与实践；设计通用 UI 组件库，提升开发效率。</li>
+            <li>带领团队制定工作计划、分配任务；收集用户反馈，持续优化网站性能与用户体验。</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 项目经历 -->
+      <section class="section">
+        <div class="section-title">项目经历</div>
+
+        <!-- 大屏可视化（真实） -->
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-name">房产数据可视化大屏</span>
+            <span class="project-badge">Web / H5</span>
+          </div>
+          <div class="project-period">2019.12 — 2020.05</div>
+          <div class="stack-row">
+            <span class="stack-tag">Express</span>
+            <span class="stack-tag">EJS</span>
+            <span class="stack-tag">Webpack</span>
+            <span class="stack-tag">jQuery</span>
+            <span class="stack-tag">AntV F2</span>
+            <span class="stack-tag">Canvas</span>
+            <span class="stack-tag">JWT</span>
+            <span class="stack-tag">Redis</span>
+            <span class="stack-tag">Sequelize</span>
+          </div>
+          <ul class="bullet-list">
+            <li>独立负责数据监控站从需求到上线全流程：Express + EJS 搭建 SSR，Webpack 多入口打包关键数据、用户增长、商户等大屏模块，公共 vendor chunk 拆分控制资源体积，优化首屏性能。</li>
+            <li>可视化层使用 AntV F2（Canvas）实现趋势与对比图表，结合 devicePixelRatio 适配高清屏；rem + viewport 布局覆盖 PC 看板与移动端场景。</li>
+            <li>JWT + Redis Session 访问控制；支持 Mock 与多环境配置，PM2 部署流程可运维。</li>
+          </ul>
+          <div class="perf-row">
+            <span class="perf-chip">多分辨率布局适配</span>
+          </div>
+        </div>
+
+        <!-- 订单详情性能优化 -->
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-name">携程旅行 APP 火车票订单详情性能优化</span>
+            <span class="project-badge">Web / H5</span>
+          </div>
+          <div class="project-period">2024.01 — 2025.01</div>
+          <div class="stack-row">
+            <span class="stack-tag">React</span>
+            <span class="stack-tag">Node.js BFF</span>
+            <span class="stack-tag">Webpack</span>
+            <span class="stack-tag">Lighthouse</span>
+            <span class="stack-tag">Chrome DevTools</span>
+          </div>
+          <ul class="bullet-list">
+            <li>分析关键渲染路径，通过 BFF 聚合接口将多个串行请求合并，减少网络往返，首屏约缩短 500ms。</li>
+            <li>运用 React Profiler 定位无效渲染节点，结合 memo / useMemo / useCallback 精准优化渲染路径；按需加载与延迟加载配合 Bundle Analyzer 持续收窄首包体积。</li>
+            <li>配合监控体系快速定位线上异常，建立性能基线与告警机制，保障业务稳定运行。</li>
+          </ul>
+          <div class="perf-row">
+            <span class="perf-chip">TTI 提升约 30%</span>
+            <span class="perf-chip">600ms → 400ms</span>
+            <span class="perf-chip">首屏缩短 500ms</span>
+          </div>
+        </div>
+
+        <!-- 汽车列表页重构 -->
+        <div class="project-item">
+          <div class="project-header">
+            <span class="project-name">携程旅行 APP 汽车列表页重构</span>
+            <span class="project-badge">多端</span>
+          </div>
+          <div class="project-period">2025.03 — 2025.07</div>
+          <div class="stack-row">
+            <span class="stack-tag">React Native</span>
+            <span class="stack-tag">XTaro</span>
+            <span class="stack-tag">Zustand</span>
+            <span class="stack-tag">FlashList</span>
+          </div>
+          <ul class="bullet-list">
+            <li>基于 XTaro 多端框架重构汽车列表页，精简业务逻辑，提升交付效率与可维护性；技术栈：React Native、Zustand、FlashList。</li>
+            <li>延迟渲染可见区域、Zustand 细粒度订阅、FlashList 虚拟列表与竞态优化，降低白屏与闪烁；推动 BI 拆分多交通品类转化指标，出票量维持正向。</li>
+          </ul>
+          <div class="perf-row">
+            <span class="perf-chip">TTI 提升约 40%</span>
+            <span class="perf-chip">500ms → 300ms</span>
+          </div>
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+</div>
+</body>
+</html>
