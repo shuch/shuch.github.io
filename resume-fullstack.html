@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="lang-zh">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>舒晨-全栈工程师</title>
+    <style>
+      :root {
+        --accent: #1e90ff;
+        --accent-dark: #1478cc;
+        --accent-heading: #0f6bb8;
+        --project-sep: #e8eef5;
+      }
+      * { box-sizing: border-box; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0;
+        background: #fff;
+      }
+      html.lang-en body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      }
+      html.lang-en [data-lang="zh"],
+      html.lang-zh [data-lang="en"] {
+        display: none !important;
+      }
+      .lang-switch {
+        position: fixed;
+        top: 12px;
+        right: max(12px, calc((100vw - 800px) / 2 + 8px));
+        z-index: 100;
+        display: flex;
+        align-items: stretch;
+        background: rgba(255, 255, 255, 0.96);
+        border: 1px solid var(--project-sep);
+        border-radius: 8px;
+        padding: 3px;
+        font-size: 12px;
+        box-shadow: 0 2px 12px rgba(15, 107, 184, 0.08);
+        -webkit-backdrop-filter: blur(6px);
+        backdrop-filter: blur(6px);
+      }
+      .lang-switch button {
+        border: none;
+        background: transparent;
+        padding: 6px 14px;
+        cursor: pointer;
+        border-radius: 6px;
+        color: #555;
+        font-family: inherit;
+        font-size: 12px;
+        line-height: 1.3;
+      }
+      .lang-switch button:hover {
+        color: var(--accent-heading);
+      }
+      .lang-switch button[aria-pressed="true"] {
+        background: var(--accent);
+        color: #fff;
+      }
+      .lang-switch button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .resume-header {
+        padding: 20px 40px 16px;
+        padding-top: 48px;
+      }
+      .resume-header h1 {
+        margin: 0 0 10px 0;
+        font-size: 23px;
+        font-weight: 600;
+        color: var(--accent-heading);
+        letter-spacing: 0.5px;
+      }
+      .resume-intent {
+        margin: 0 0 8px 0;
+        font-size: 13.5px;
+        font-weight: 600;
+        color: var(--accent);
+      }
+      .resume-contact {
+        margin: 0;
+        font-size: 13px;
+        color: #444;
+        line-height: 1.72;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0 4px;
+        align-items: center;
+      }
+      .resume-contact .sep {
+        color: #ccc;
+        margin: 0 6px;
+        user-select: none;
+      }
+      .resume-contact-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .resume-contact-icon {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+        color: var(--accent);
+      }
+      main {
+        padding: 32px 40px 40px;
+      }
+      h4 {
+        margin: 0 0 12px 0;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 1.2px;
+        border-bottom: 1.5px solid var(--accent);
+        padding-bottom: 6px;
+      }
+      html.lang-en h4 {
+        letter-spacing: 0.8px;
+      }
+      section {
+        margin-bottom: 24px;
+      }
+      section:last-child { margin-bottom: 0; }
+      .section-block {
+        margin-bottom: 28px;
+      }
+      .section-block:last-child { margin-bottom: 0; }
+      .title {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+      .company {
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--accent-heading);
+      }
+      .title .role {
+        font-size: 13px;
+        color: #555;
+      }
+      .time {
+        margin-left: auto;
+        font-size: 12px;
+        color: #888;
+        font-weight: 500;
+      }
+      .content.row, .result.row {
+        display: flex;
+        gap: 8px;
+        margin-top: 6px;
+      }
+      .content.row > p:first-child, .result.row > p:first-child {
+        flex-shrink: 0;
+        margin: 0;
+        font-size: 13px;
+        color: #666;
+        min-width: 3.5em;
+      }
+      html.lang-en .content.row > p:first-child,
+      html.lang-en .result.row > p:first-child {
+        min-width: 7.5em;
+      }
+      .content.row ol, .result.row ol {
+        margin: 0;
+        padding-left: 18px;
+        flex: 1;
+      }
+      .content.row li, .result.row li {
+        margin-bottom: 4px;
+      }
+      .content.row li:last-child, .result.row li:last-child {
+        margin-bottom: 0;
+      }
+      .pd40 {
+        padding-left: 0;
+        margin: 0;
+        flex: 1;
+      }
+      .project-item {
+        margin-top: 0;
+        padding: 14px 0 16px 0;
+        border-bottom: 1px solid var(--project-sep);
+      }
+      .project-item:first-child {
+        margin-top: 12px;
+        padding-top: 0;
+      }
+      .project-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .project-name {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--accent-heading);
+      }
+      .project-item .title {
+        margin-bottom: 6px;
+      }
+      .project-item .content.row, .project-item .result.row {
+        margin-top: 4px;
+      }
+      .project-item .content.row ol, .project-item .result.row ol {
+        padding-left: 16px;
+      }
+      .cert {
+        display: inline-block;
+        margin-right: 16px;
+        margin-bottom: 4px;
+        font-size: 13px;
+      }
+      .cert-section {
+        font-size: 13px;
+        color: #555;
+      }
+      .skills-inline {
+        margin: 0;
+        font-size: 13px;
+        color: #333;
+        line-height: 1.62;
+      }
+      .skills-inline + .skills-inline {
+        margin-top: 4px;
+      }
+      .skills-inline .k {
+        display: inline-block;
+        min-width: 5.5em;
+        color: var(--accent-heading);
+        font-weight: 600;
+        margin-right: 4px;
+      }
+      html.lang-en .skills-inline .k {
+        min-width: 6.5em;
+      }
+      @media print {
+        body { max-width: none; }
+        .lang-switch { display: none !important; }
+        .resume-header {
+          padding: 16px 40px 12px;
+          padding-top: 16px;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        main {
+          padding: 20px 40px 32px;
+        }
+        section, .section-block { margin-bottom: 18px; }
+        .project-item { padding-top: 10px; padding-bottom: 12px; }
+        .project-item:first-child { margin-top: 8px; padding-top: 0; }
+      }
+    </style>
+  </head>
+
+  <body id="pdf">
+    <div class="lang-switch" role="group" aria-label="Language">
+      <button type="button" id="lang-zh" aria-pressed="true">中文</button>
+      <button type="button" id="lang-en" aria-pressed="false">EN</button>
+    </div>
+    <header class="resume-header">
+      <h1><span data-lang="zh">舒晨</span><span data-lang="en">Steve Shu</span></h1>
+      <p class="resume-intent"><span data-lang="zh">全栈工程师</span><span data-lang="en">Full-Stack Engineer</span></p>
+      <p class="resume-contact">
+        <span class="resume-contact-item">
+          <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.86.3 1.7.54 2.5a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.8.24 1.64.42 2.5.54A2 2 0 0 1 22 16.92z"/></svg>
+          <span>17602151165</span>
+        </span><span class="sep">|</span>
+        <span class="resume-contact-item">
+          <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>
+          <span data-lang="zh">微信同号</span><span data-lang="en">WeChat (same number)</span>
+        </span><span class="sep">|</span>
+        <span class="resume-contact-item">
+          <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+          <span data-lang="zh">2271728859@qq.com</span><span data-lang="en">shuchery@gmail.com</span>
+        </span><span class="sep">|</span>
+        <span class="resume-contact-item">
+          <svg class="resume-contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span data-lang="zh">上海</span><span data-lang="en">Shanghai, China</span>
+        </span>
+      </p>
+    </header>
+    <main>
+      <h4><span data-lang="zh">个人优势</span><span data-lang="en">Summary</span></h4>
+      <section>
+        <div class="content row">
+          <ol>
+            <li><span data-lang="zh">熟练使用 React/React Native、Vue 构建业务界面，能独立负责 Node.js 活动接口与 BFF 协作；具备 Java + MySQL/MyBatis 服务端与运营后台开发经验。</span><span data-lang="en">Strong full-stack delivery: React / React Native and Vue for product UI; independent Node.js campaign APIs and BFF collaboration; Java + MySQL/MyBatis backend and admin experience.</span></li>
+            <li><span data-lang="zh">主导携程火车票 RN 核心业务（日均 100 万+），通过 BFF 聚合、渲染与加载优化及跨端性能监控，核心页面 TTI 提升约 30%～40%。</span><span data-lang="en">Led core train-ticket flows on React Native (1M+ DAU); BFF aggregation, render/load tuning, and cross-platform monitoring drove ~30–40% TTI gains on key pages.</span></li>
+            <li><span data-lang="zh">熟悉 Git 与 CI/CD 发布流程，推动业务与跨端监控体系建设，保障高流量场景稳定运行。</span><span data-lang="en">Proficient with Git and CI/CD releases; built business and cross-platform monitoring for stable high-traffic operations.</span></li>
+            <li><span data-lang="zh">具备 RN 技术带教与项目管理经验，能推动组件库落地与团队高效交付。</span><span data-lang="en">React Native mentoring and project leadership; shipped shared component libraries and efficient team delivery.</span></li>
+          </ol>
+        </div>
+      </section>
+      <h4><span data-lang="zh">专业技能</span><span data-lang="en">Skills</span></h4>
+      <section>
+        <p class="skills-inline"><span class="k"><span data-lang="zh">语言</span><span data-lang="en">Languages</span></span>JavaScript (ES6+) · TypeScript · Java · HTML · CSS</p>
+        <p class="skills-inline"><span class="k"><span data-lang="zh">前端</span><span data-lang="en">Front-End</span></span>React · React Native · Vue · Zustand · Webpack · Vite</p>
+        <p class="skills-inline"><span class="k"><span data-lang="zh">后端</span><span data-lang="en">Back-End</span></span>Node.js · Express · BFF · MySQL · Redis · MyBatis · Sequelize</p>
+        <p class="skills-inline"><span class="k"><span data-lang="zh">工程</span><span data-lang="en">DevOps</span></span><span data-lang="zh">Git · CI/CD · 跨端性能监控</span><span data-lang="en">Git · CI/CD · cross-platform performance monitoring</span></p>
+      </section>
+      <h4><span data-lang="zh">工作经历</span><span data-lang="en">Work Experience</span></h4>
+      <section class="section-block">
+        <div class="title">
+          <span class="company"><span data-lang="zh">携程旅游网络技术（上海）有限公司</span><span data-lang="en">Trip.com (Shanghai)</span></span>
+          <span class="role"><span data-lang="zh">高级前端开发工程师</span><span data-lang="en">Senior Front-End Developer</span></span>
+          <span class="time"><span data-lang="zh">2020.08 - 至今</span><span data-lang="en">Aug 2020 – Present</span></span>
+        </div>
+        <div class="content row">
+          <p><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
+          <ol>
+            <li><span data-lang="zh">主导携程旅行 APP 火车票核心功能设计与实现（日均 100 万+）；主导 BFF 层接口设计，通过 Node 聚合层封装解决前端并发请求冗余问题，并在极端网络环境下引入降级策略，保障预订链路稳定性。</span><span data-lang="en">Led core train-ticket features in the Trip.com app (1M+ DAU); owned BFF API design—Node aggregation layer to cut redundant parallel client requests, with degradation strategies under poor network for stable booking flows.</span></li>
+            <li><span data-lang="zh">独立完成火车票增长 H5 及 Node.js（Express）活动接口设计、部署与联调，项目稳定性显著提升。</span><span data-lang="en">Built growth H5 pages and designed/deployed Node.js (Express) campaign APIs end-to-end; significantly improved stability.</span></li>
+            <li><span data-lang="zh">推动搭建跨端性能与业务监控体系，结合 CI/CD 发布快速定位异常，保障高流量场景稳定运行。</span><span data-lang="en">Established cross-platform performance and business monitoring with CI/CD releases for faster incident response at scale.</span></li>
+            <li><span data-lang="zh">设计并落地跨端React Native组件库，统一开发规范，团队组件复用率提升。</span><span data-lang="en">Designed and shipped a cross-platform React Native component library; improved reuse and consistency.</span></li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p><span data-lang="zh">业绩：</span><span data-lang="en">Highlights:</span></p>
+          <ol>
+            <li><span data-lang="zh">主导公司React Native技术培训，推动跨平台框架落地，业务迭代效率提升。</span><span data-lang="en">Led internal React Native training and adoption of cross-platform practices; faster iteration.</span></li>
+            <li><span data-lang="zh">推动业务组件重构与精简，减少代码冗余，优化打包体积，团队开发效率大幅提升。</span><span data-lang="en">Refactored and simplified business components; reduced bundle size and improved team productivity.</span></li>
+          </ol>
+        </div>
+      </section>
+      <section class="section-block">
+        <div class="title">
+          <span class="company"><span data-lang="zh">深圳市房多多网络科技有限公司</span><span data-lang="en">FangDD Network Technology (Shenzhen)</span></span>
+          <span class="role"><span data-lang="zh">前端开发工程师</span><span data-lang="en">Front-End Developer</span></span>
+          <span class="time"><span data-lang="zh">2017.08 - 2020.05</span><span data-lang="en">Aug 2017 – May 2020</span></span>
+        </div>
+        <div class="content row">
+          <p><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
+          <ol>
+            <li><span data-lang="zh">主导房多多小程序从0到1搭建，上线后日均访问量达72万；主导好房速卖、联卖项目前端研发。</span><span data-lang="en">Built the FangDD mini program from scratch (720K+ DAU); led front-end for Haofang Sumai and joint-sale products.</span></li>
+            <li><span data-lang="zh">主导前端项目规划与落地，推动前后端及UI协作，保障需求高效交付。</span><span data-lang="en">Owned front-end planning and execution; coordinated with backend and design for on-time delivery.</span></li>
+            <li><span data-lang="zh">担任项目组 Scrum Master，组织团队稳定迭代，把控开发节奏。</span><span data-lang="en">Served as Scrum Master; facilitated steady iterations and predictable delivery.</span></li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p><span data-lang="zh">业绩：</span><span data-lang="en">Highlights:</span></p>
+          <ol>
+            <li><span data-lang="zh">沉淀联卖业务通用组件，开发效率提升，项目体验优化。</span><span data-lang="en">Built reusable components for joint-sale flows; improved dev speed and UX.</span></li>
+          </ol>
+        </div>
+      </section>
+      <section class="section-block">
+        <div class="title">
+          <span class="company"><span data-lang="zh">上海赐云网络科技有限公司</span><span data-lang="en">Ciyun Network Technology (Shanghai)</span></span>
+          <span class="role"><span data-lang="zh">软件工程师</span><span data-lang="en">Software Engineer</span></span>
+          <span class="time"><span data-lang="zh">2015.06 - 2017.07</span><span data-lang="en">Jun 2015 – Jul 2017</span></span>
+        </div>
+        <div class="content row">
+          <p><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
+          <ol>
+            <li><span data-lang="zh">独立完成官网及H5页面前端开发，实现产品视觉与交互，保障浏览器兼容性。</span><span data-lang="en">Delivered corporate site and H5 pages; implemented visual design and interactions with solid browser support.</span></li>
+            <li><span data-lang="zh">负责前后端数据对接与效果展示，推动接口联调落地。</span><span data-lang="en">Owned API integration and end-to-end behavior with backend colleagues.</span></li>
+            <li><span data-lang="zh">主导前端技术选型，推动Web前沿技术探索与实践。</span><span data-lang="en">Led technology choices and explorations with modern web practices.</span></li>
+            <li><span data-lang="zh">收集用户反馈，持续优化网站性能和用户体验。</span><span data-lang="en">Collected user feedback and iterated on performance and UX.</span></li>
+          </ol>
+        </div>
+        <div class="result row">
+          <p><span data-lang="zh">业绩：</span><span data-lang="en">Highlights:</span></p>
+          <ol>
+            <li><span data-lang="zh">带领技术团队制定工作计划、分配任务，减少沟通成本。</span><span data-lang="en">Led the team on planning and task breakdown; reduced coordination overhead.</span></li>
+            <li><span data-lang="zh">设计通用UI组件库，提升开发效率，节约开发时间。</span><span data-lang="en">Designed a shared UI kit to speed up delivery.</span></li>
+          </ol>
+        </div>
+      </section>
+      <h4><span data-lang="zh">项目经历</span><span data-lang="en">Projects</span></h4>
+      <section>
+        <div class="project-item">
+          <div class="title">
+            <span class="project-name"><span data-lang="zh">携程旅行APP火车票订单详情性能优化 · BFF</span><span data-lang="en">Trip.com App — Train Order Detail (BFF + RN)</span></span>
+            <span class="time"><span data-lang="zh">2024.01 - 2025.01</span><span data-lang="en">Jan 2024 – Jan 2025</span></span>
+          </div>
+          <div class="content row">
+            <p style="flex-shrink: 0;"><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
+            <ol>
+              <li><span data-lang="zh">BFF 聚合接口减少串行请求；React 渲染路径优化与资源按需/延迟加载，首屏约缩短 500ms。</span><span data-lang="en">BFF aggregation to cut serial requests; optimized React render path and on-demand/deferred loading; ~500ms faster first paint.</span></li>
+            </ol>
+          </div>
+          <div class="result row">
+            <p><span data-lang="zh">业绩：</span><span data-lang="en">Results:</span></p>
+            <ol>
+              <li><span data-lang="zh">订单详情页 TTI 提升约 30%（600ms → 400ms）。</span><span data-lang="en">TTI improved ~30% on order detail (600ms → 400ms).</span></li>
+              <li><span data-lang="zh">配合跨端监控体系快速定位异常，保障业务稳定。</span><span data-lang="en">Cross-platform monitoring enabled faster root-cause analysis and stable operations.</span></li>
+            </ol>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="title">
+            <span class="project-name"><span data-lang="zh">智行火车票会员助力增长活动 · 全栈</span><span data-lang="en">Ztrip VIP Assist Campaign — Full-Stack (Vue + Node.js)</span></span>
+            <span class="time"><span data-lang="zh">2020.12 - 2021.02</span><span data-lang="en">Dec 2020 – Feb 2021</span></span>
+          </div>
+          <div class="content row">
+            <p style="flex-shrink: 0;"><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
+            <ol>
+              <li><span data-lang="zh">前端：基于 Vue 2 独立完成 H5 活动页，覆盖邀请助力、阶梯立减、随机红包与 1 元开通铂金会员全流程；适配智行 APP / 微信小程序 / H5，集成分享裂变、支付收银台与海报生成。</span><span data-lang="en">Frontend: Built the Vue 2 H5 campaign end-to-end—tiered assist discounts, random bonus, and ¥1 platinum VIP purchase; adapted for Ztrip app, WeChat mini program, and H5 with viral sharing, payment desk, and poster generation.</span></li>
+              <li><span data-lang="zh">后端：基于 Node.js 实现活动详情、发起/好友助力、开通会员下单等接口；Sequelize 建模与助力阶梯金额规则，黑钻拦截、频控与重复助力校验；对接 SOA 会员服务、支付下单与微信模板消息。</span><span data-lang="en">Backend: Node.js rest APIs for activity detail, launch/assist flows, and VIP purchase orders; Sequelize models with tiered reward rules, black-diamond checks, rate limits, and duplicate-assist guards; integrated SOA membership, payment, and WeChat template messages.</span></li>
+            </ol>
+          </div>
+          <div class="result row">
+            <p><span data-lang="zh">业绩：</span><span data-lang="en">Results:</span></p>
+            <ol>
+              <li><span data-lang="zh">前后端一体化交付，支撑春运节点会员增长活动按期上线。</span><span data-lang="en">Full-stack delivery enabled on-time launch of the Spring Festival membership growth campaign.</span></li>
+              <li><span data-lang="zh">多端分享与支付链路打通，助力裂变与会员转化闭环落地。</span><span data-lang="en">Connected multi-channel sharing and payment for a complete assist-to-conversion loop.</span></li>
+            </ol>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="title">
+            <span class="project-name"><span data-lang="zh">携程旅行APP汽车列表页重构</span><span data-lang="en">Trip.com App — Bus Listing Page Rewrite</span></span>
+            <span class="time"><span data-lang="zh">2025.03 - 2025.07</span><span data-lang="en">Mar 2025 – Jul 2025</span></span>
+          </div>
+          <div class="content row">
+            <p style="flex-shrink: 0;"><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
+            <ol>
+              <li><span data-lang="zh">基于 xtaro 多端框架重构汽车列表页，精简业务逻辑，提升交付与可维护性；技术栈：React Native、Zustand、FlashList。</span><span data-lang="en">Rebuilt the bus listing page with XTaro; simplified logic for maintainability. Stack: React Native, Zustand, FlashList.</span></li>
+              <li><span data-lang="zh">延迟渲染可见区、Zustand 细粒度订阅、FlashList 虚拟列表与 TTI/竞态优化，降低白屏与闪烁。</span><span data-lang="en">Deferred rendering for visible areas, fine-grained Zustand subscriptions, FlashList virtualization, TTI and race-condition fixes; less blank screen and flicker.</span></li>
+            </ol>
+          </div>
+          <div class="result row">
+            <p><span data-lang="zh">业绩：</span><span data-lang="en">Results:</span></p>
+            <ol>
+              <li><span data-lang="zh">预加载与渲染优化，页面 TTI 提升约 40%（500ms → 300ms）。</span><span data-lang="en">Preload and render tuning; TTI ~40% better (500ms → 300ms).</span></li>
+              <li><span data-lang="zh">推动 BI 拆分多交通品类转化指标，出票量维持正向。</span><span data-lang="en">Worked with BI on multi-modal conversion metrics; ticket volume stayed positive.</span></li>
+            </ol>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="title">
+            <span class="project-name"><span data-lang="zh">房产数据可视化大屏</span><span data-lang="en">Real Estate Data Visualization Dashboard</span></span>
+            <span class="time"><span data-lang="zh">2017.06 - 2018.05</span><span data-lang="en">Jun 2017 – May 2018</span></span>
+          </div>
+          <div class="content row">
+            <p style="flex-shrink: 0;"><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
+            <ol>
+              <li><span data-lang="zh">独立负责数据监控站从需求到上线全流程：Express + EJS 搭建 SSR，Webpack 多入口打包关键数据、用户增长、商户等大屏模块，公共 vendor chunk 拆分控制资源体积，优化首屏性能。</span><span data-lang="en">Owned the data monitoring site end-to-end: Express + EJS SSR, Webpack multi-entry bundles for key metrics, user growth, and merchant dashboards; shared vendor chunks to control bundle size and improve first paint.</span></li>
+              <li><span data-lang="zh">可视化层使用 AntV F2（Canvas）实现趋势与对比图表，结合 devicePixelRatio 适配高清屏；rem + viewport 布局覆盖 PC 看板与移动端场景。</span><span data-lang="en">Built trend and comparison charts with AntV F2 (Canvas) and devicePixelRatio for retina screens; rem + viewport layout for PC dashboards and mobile.</span></li>
+              <li><span data-lang="zh">JWT + Redis Session 访问控制；支持 Mock 与多环境配置，PM2 部署流程可运维。技术栈：Express、EJS、Webpack、jQuery、Sequelize。</span><span data-lang="en">JWT + Redis session access control; Mock and multi-environment configs with PM2 deployment. Stack: Express, EJS, Webpack, jQuery, Sequelize.</span></li>
+            </ol>
+          </div>
+          <div class="result row">
+            <p><span data-lang="zh">业绩：</span><span data-lang="en">Results:</span></p>
+            <ol>
+              <li><span data-lang="zh">完成 PC 看板与移动端多分辨率布局适配，保障业务方跨场景数据查看体验。</span><span data-lang="en">Delivered multi-resolution layouts for PC dashboards and mobile, enabling consistent cross-device data viewing.</span></li>
+            </ol>
+          </div>
+        </div>
+        <div class="project-item">
+          <div class="title">
+            <span class="project-name"><span data-lang="zh">积分返利后台管理系统</span><span data-lang="en">Integral Redemption Backend Management System</span></span>
+            <span class="time"><span data-lang="zh">2015.06 - 2017.07</span><span data-lang="en">Jun 2015 – Jul 2017</span></span>
+          </div>
+          <div class="content row">
+            <p style="flex-shrink: 0;"><span data-lang="zh">内容：</span><span data-lang="en">Responsibilities:</span></p>
+            <ol>
+              <li><span data-lang="zh">使用 Spring 开发 APP 后端数据接口，支撑客户端核心业务调用。</span><span data-lang="en">Built core backend APIs with Spring for the mobile app client.</span></li>
+              <li><span data-lang="zh">使用 Java Servlet 搭建运营管理后台，完成数据管理与操作权限配置。</span><span data-lang="en">Developed the admin console with Java Servlet, including data management and role-based permissions.</span></li>
+              <li><span data-lang="zh">基于 MySQL + MyBatis 设计数据层，封装定制化 SQL，保障数据读写稳定。</span><span data-lang="en">Designed the data layer with MySQL and MyBatis, using tailored SQL for reliable reads and writes.</span></li>
+            </ol>
+          </div>
+          <div class="result row">
+            <p><span data-lang="zh">业绩：</span><span data-lang="en">Results:</span></p>
+            <ol>
+              <li><span data-lang="zh">带领团队从 0 到 1 完成 APP 后端与运营后台搭建上线，打通接口、权限与数据链路。</span><span data-lang="en">Led the team to deliver the app backend and admin console from scratch, connecting APIs, permissions, and data flows end-to-end.</span></li>
+              <li><span data-lang="zh">负责需求拆解与联调发布，支撑产品持续迭代与线上稳定运行。</span><span data-lang="en">Owned requirement breakdown, integration, and releases to support steady product iteration and stable operations.</span></li>
+            </ol>
+          </div>
+        </div>
+      </section>
+      <h4><span data-lang="zh">教育经历</span><span data-lang="en">Education</span></h4>
+      <section>
+        <div class="title">
+          <span><span data-lang="zh">湖北理工学院</span><span data-lang="en">Hubei Polytechnic University</span></span>
+          <span><span data-lang="zh">本科 信息与计算科学</span><span data-lang="en">B.Sc. — Information &amp; Computational Science</span></span>
+          <span class="time">2011-2015</span>
+        </div>
+      </section>
+      <h4><span data-lang="zh">资格证书</span><span data-lang="en">Certifications</span></h4>
+      <section>
+        <div class="cert-section">
+          <span class="cert"><span data-lang="zh">大学英语六级</span><span data-lang="en">CET-6</span></span>
+          <span class="cert"><span data-lang="zh">全国计算机技术与软件专业技术资格（程序员）</span><span data-lang="en">Software Designer (Programmer) — National Qualification</span></span>
+        </div>
+      </section>
+    </main>
+    <script>
+(function () {
+  var STORAGE_KEY = 'resumeLang';
+  var titles = { zh: '舒晨-全栈工程师', en: 'Steve Shu — Full-Stack Engineer' };
+
+  function applyLang(lang) {
+    var isEn = lang === 'en';
+    document.documentElement.classList.toggle('lang-en', isEn);
+    document.documentElement.classList.toggle('lang-zh', !isEn);
+    document.documentElement.lang = isEn ? 'en' : 'zh-CN';
+    document.title = titles[isEn ? 'en' : 'zh'];
+    try {
+      localStorage.setItem(STORAGE_KEY, lang);
+    } catch (e) {}
+    var zhBtn = document.getElementById('lang-zh');
+    var enBtn = document.getElementById('lang-en');
+    if (zhBtn && enBtn) {
+      zhBtn.setAttribute('aria-pressed', isEn ? 'false' : 'true');
+      enBtn.setAttribute('aria-pressed', isEn ? 'true' : 'false');
+    }
+  }
+
+  var saved = null;
+  try {
+    saved = localStorage.getItem(STORAGE_KEY);
+  } catch (e) {}
+
+  applyLang(saved === 'en' || saved === 'zh' ? saved : 'zh');
+
+  document.getElementById('lang-zh').addEventListener('click', function () {
+    applyLang('zh');
+  });
+  document.getElementById('lang-en').addEventListener('click', function () {
+    applyLang('en');
+  });
+})();
+    </script>
+  </body>
+</html>
